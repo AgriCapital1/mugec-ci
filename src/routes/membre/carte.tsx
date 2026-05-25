@@ -185,8 +185,7 @@ function Page() {
   if (loading) return <div className="flex min-h-screen items-center justify-center"><Loader2 className="h-6 w-6 animate-spin" /></div>;
 
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader title="Membre MUGEC-CI" nav={MEMBRE_NAV} />
+    <MembreLayout>
       <section className="container mx-auto max-w-4xl px-4 py-10">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <h1 className="text-2xl font-bold">Carte et fiche membre</h1>
