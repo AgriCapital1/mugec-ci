@@ -258,7 +258,7 @@ function Page() {
           </CardContent>
         </Card>
       </section>
-    </div>
+    </MembreLayout>
   );
 }
 
