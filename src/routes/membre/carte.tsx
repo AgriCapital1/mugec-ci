@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/lib/auth";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
-import { Watermark } from "@/components/Watermark";
+
 import logo from "@/assets/mugec-logo.png";
 import watermarkUrl from "@/assets/mugec-watermark.png";
 import { Download, Printer, Loader2 } from "lucide-react";
@@ -409,12 +409,4 @@ function CardField({
   );
 }
 
-function Info({ label, v }: { label: string; v?: string }) {
-  return (
-    <div className="flex gap-2 border-b border-dotted pb-1">
-      <span className="w-56 font-semibold text-primary">{label} :</span>
-      <span>{v ?? "—"}</span>
-    </div>
-  );
-}
 
