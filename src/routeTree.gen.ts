@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ScannerRouteImport } from './routes/scanner'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as OpportunitesRouteImport } from './routes/opportunites'
 import { Route as LoginRouteImport } from './routes/login'
@@ -20,12 +21,19 @@ import { Route as ActualitesRouteImport } from './routes/actualites'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MembreIndexRouteImport } from './routes/membre/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as VerifierMatriculeRouteImport } from './routes/verifier.$matricule'
 import { Route as MembreProfilRouteImport } from './routes/membre/profil'
+import { Route as MembreFicheRouteImport } from './routes/membre/fiche'
 import { Route as MembreDocumentsRouteImport } from './routes/membre/documents'
 import { Route as MembreCotisationsRouteImport } from './routes/membre/cotisations'
 import { Route as MembreCarteRouteImport } from './routes/membre/carte'
 import { Route as AdminMiprojetRouteImport } from './routes/admin/miprojet'
 
+const ScannerRoute = ScannerRouteImport.update({
+  id: '/scanner',
+  path: '/scanner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
@@ -81,9 +89,19 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VerifierMatriculeRoute = VerifierMatriculeRouteImport.update({
+  id: '/verifier/$matricule',
+  path: '/verifier/$matricule',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MembreProfilRoute = MembreProfilRouteImport.update({
   id: '/membre/profil',
   path: '/membre/profil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MembreFicheRoute = MembreFicheRouteImport.update({
+  id: '/membre/fiche',
+  path: '/membre/fiche',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MembreDocumentsRoute = MembreDocumentsRouteImport.update({
@@ -117,11 +135,14 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/opportunites': typeof OpportunitesRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/scanner': typeof ScannerRoute
   '/admin/miprojet': typeof AdminMiprojetRoute
   '/membre/carte': typeof MembreCarteRoute
   '/membre/cotisations': typeof MembreCotisationsRoute
   '/membre/documents': typeof MembreDocumentsRoute
+  '/membre/fiche': typeof MembreFicheRoute
   '/membre/profil': typeof MembreProfilRoute
+  '/verifier/$matricule': typeof VerifierMatriculeRoute
   '/admin/': typeof AdminIndexRoute
   '/membre/': typeof MembreIndexRoute
 }
@@ -135,11 +156,14 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/opportunites': typeof OpportunitesRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/scanner': typeof ScannerRoute
   '/admin/miprojet': typeof AdminMiprojetRoute
   '/membre/carte': typeof MembreCarteRoute
   '/membre/cotisations': typeof MembreCotisationsRoute
   '/membre/documents': typeof MembreDocumentsRoute
+  '/membre/fiche': typeof MembreFicheRoute
   '/membre/profil': typeof MembreProfilRoute
+  '/verifier/$matricule': typeof VerifierMatriculeRoute
   '/admin': typeof AdminIndexRoute
   '/membre': typeof MembreIndexRoute
 }
@@ -154,11 +178,14 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/opportunites': typeof OpportunitesRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/scanner': typeof ScannerRoute
   '/admin/miprojet': typeof AdminMiprojetRoute
   '/membre/carte': typeof MembreCarteRoute
   '/membre/cotisations': typeof MembreCotisationsRoute
   '/membre/documents': typeof MembreDocumentsRoute
+  '/membre/fiche': typeof MembreFicheRoute
   '/membre/profil': typeof MembreProfilRoute
+  '/verifier/$matricule': typeof VerifierMatriculeRoute
   '/admin/': typeof AdminIndexRoute
   '/membre/': typeof MembreIndexRoute
 }
@@ -174,11 +201,14 @@ export interface FileRouteTypes {
     | '/login'
     | '/opportunites'
     | '/reset-password'
+    | '/scanner'
     | '/admin/miprojet'
     | '/membre/carte'
     | '/membre/cotisations'
     | '/membre/documents'
+    | '/membre/fiche'
     | '/membre/profil'
+    | '/verifier/$matricule'
     | '/admin/'
     | '/membre/'
   fileRoutesByTo: FileRoutesByTo
@@ -192,11 +222,14 @@ export interface FileRouteTypes {
     | '/login'
     | '/opportunites'
     | '/reset-password'
+    | '/scanner'
     | '/admin/miprojet'
     | '/membre/carte'
     | '/membre/cotisations'
     | '/membre/documents'
+    | '/membre/fiche'
     | '/membre/profil'
+    | '/verifier/$matricule'
     | '/admin'
     | '/membre'
   id:
@@ -210,11 +243,14 @@ export interface FileRouteTypes {
     | '/login'
     | '/opportunites'
     | '/reset-password'
+    | '/scanner'
     | '/admin/miprojet'
     | '/membre/carte'
     | '/membre/cotisations'
     | '/membre/documents'
+    | '/membre/fiche'
     | '/membre/profil'
+    | '/verifier/$matricule'
     | '/admin/'
     | '/membre/'
   fileRoutesById: FileRoutesById
@@ -229,17 +265,27 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   OpportunitesRoute: typeof OpportunitesRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  ScannerRoute: typeof ScannerRoute
   AdminMiprojetRoute: typeof AdminMiprojetRoute
   MembreCarteRoute: typeof MembreCarteRoute
   MembreCotisationsRoute: typeof MembreCotisationsRoute
   MembreDocumentsRoute: typeof MembreDocumentsRoute
+  MembreFicheRoute: typeof MembreFicheRoute
   MembreProfilRoute: typeof MembreProfilRoute
+  VerifierMatriculeRoute: typeof VerifierMatriculeRoute
   AdminIndexRoute: typeof AdminIndexRoute
   MembreIndexRoute: typeof MembreIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/scanner': {
+      id: '/scanner'
+      path: '/scanner'
+      fullPath: '/scanner'
+      preLoaderRoute: typeof ScannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reset-password': {
       id: '/reset-password'
       path: '/reset-password'
@@ -317,11 +363,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/verifier/$matricule': {
+      id: '/verifier/$matricule'
+      path: '/verifier/$matricule'
+      fullPath: '/verifier/$matricule'
+      preLoaderRoute: typeof VerifierMatriculeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/membre/profil': {
       id: '/membre/profil'
       path: '/membre/profil'
       fullPath: '/membre/profil'
       preLoaderRoute: typeof MembreProfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/membre/fiche': {
+      id: '/membre/fiche'
+      path: '/membre/fiche'
+      fullPath: '/membre/fiche'
+      preLoaderRoute: typeof MembreFicheRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/membre/documents': {
@@ -365,11 +425,14 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   OpportunitesRoute: OpportunitesRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  ScannerRoute: ScannerRoute,
   AdminMiprojetRoute: AdminMiprojetRoute,
   MembreCarteRoute: MembreCarteRoute,
   MembreCotisationsRoute: MembreCotisationsRoute,
   MembreDocumentsRoute: MembreDocumentsRoute,
+  MembreFicheRoute: MembreFicheRoute,
   MembreProfilRoute: MembreProfilRoute,
+  VerifierMatriculeRoute: VerifierMatriculeRoute,
   AdminIndexRoute: AdminIndexRoute,
   MembreIndexRoute: MembreIndexRoute,
 }

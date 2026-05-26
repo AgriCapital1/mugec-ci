@@ -36,6 +36,7 @@ const NAV_ITEMS = [
   { to: "/membre", label: "Tableau de bord", icon: LayoutDashboard },
   { to: "/membre/profil", label: "Mon profil", icon: User },
   { to: "/membre/carte", label: "Ma carte", icon: CreditCard },
+  { to: "/membre/fiche", label: "Fiche d'adhésion", icon: FileText },
   { to: "/membre/documents", label: "Documents", icon: FileText },
   { to: "/membre/cotisations", label: "Cotisations", icon: Wallet },
 ] as const;
