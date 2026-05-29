@@ -1,16 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/mugec-logo.png";
+import logo from "@/assets/anzrbo-logo.png";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
-
 const nav = [
   { to: "/", label: "Accueil" },
-  { to: "/actualites", label: "Actualités" },
-  { to: "/opportunites", label: "Opportunités" },
-  { to: "/forum", label: "Forum" },
-  { to: "/faq", label: "FAQ" },
+  { to: "/scanner", label: "Scanner QR" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -19,11 +15,13 @@ export function SiteHeader() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   return (
-
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
-      <div className="container mx-auto flex h-28 max-w-7xl items-center justify-between gap-4 px-4">
+      <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4">
         <Link to="/" className="flex items-center gap-3">
-          <img src={logo} alt="MUGEC-CI" className="h-20 w-auto md:h-24" />
+          <img src={logo} alt="ANZRBO" className="h-12 w-auto md:h-14" />
+          <span className="hidden text-sm font-semibold uppercase tracking-wider text-primary sm:inline">
+            ANZRBO
+          </span>
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
           {nav.map((n) => (
@@ -39,20 +37,16 @@ export function SiteHeader() {
         </nav>
         <div className="flex items-center gap-2">
           {!mounted ? (
-            <div className="h-9 w-40" aria-hidden />
+            <div className="h-9 w-32" aria-hidden />
           ) : user ? (
             <>
-              <Button asChild variant="outline" size="sm"><Link to="/membre">Mon espace</Link></Button>
+              <Button asChild variant="outline" size="sm"><Link to="/admin">Admin</Link></Button>
               <Button size="sm" variant="ghost" onClick={() => signOut()}>Déconnexion</Button>
             </>
           ) : (
-            <>
-              <Button asChild variant="ghost" size="sm"><Link to="/login">Connexion</Link></Button>
-              <Button asChild size="sm"><Link to="/inscription">S'inscrire</Link></Button>
-            </>
+            <Button asChild variant="outline" size="sm"><Link to="/login">Connexion admin</Link></Button>
           )}
         </div>
-
       </div>
     </header>
   );
