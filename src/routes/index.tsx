@@ -1,86 +1,109 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, ShieldCheck, Users, Wallet, Smartphone, FileBadge, Bell, ScanLine } from "lucide-react";
-import logo from "@/assets/mugec-logo.png";
+import { Input } from "@/components/ui/input";
+import { ArrowRight, ScanLine, Search, ShieldCheck, Users, HandCoins, Heart, Bell } from "lucide-react";
+import logo from "@/assets/anzrbo-logo.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "ANZRBO — Association des N'Zipris Résidents de Bonon" },
+      { name: "description", content: "Plateforme officielle ANZRBO : entraide, assistance au décès et solidarité pour les N'Zipris résidents de Bonon." },
+      { property: "og:title", content: "ANZRBO — Association des N'Zipris Résidents de Bonon" },
+      { property: "og:description", content: "Entraide et assistance mutuelle — Bonon, Côte d'Ivoire." },
+    ],
+  }),
 });
 
 const stats = [
-  { label: "Membres potentiels", value: "50 000+" },
-  { label: "Collectivités couvertes", value: "201" },
-  { label: "Régions", value: "31" },
-  { label: "Frais d’inscription", value: "5 000 F" },
+  { label: "Cotisation par décès", value: "1 200 F" },
+  { label: "Assistance versée", value: "500 000 F" },
+  { label: "Sous-préfecture", value: "Bonon" },
+  { label: "Pays", value: "Côte d'Ivoire" },
 ];
 
 const features = [
-  { icon: Users, title: "Inscription 100% en ligne", desc: "Inscrivez-vous en 3 étapes, payez par mobile money et recevez votre validation automatiquement." },
-  { icon: Wallet, title: "Vos cotisations simplifiées", desc: "Réglez vos cotisations via Orange Money, MTN MoMo, Wave ou Moov, en temps réel." },
-  { icon: FileBadge, title: "Votre fiche & carte de membre", desc: "Téléchargez vos documents officiels au format PDF, signés par la MUGEC-CI." },
-  { icon: ShieldCheck, title: "Un espace sécurisé", desc: "Vos données personnelles et vos documents sont protégés et chiffrés." },
-  { icon: Bell, title: "Restez informé(e)", desc: "Recevez vos rappels et notifications par SMS, WhatsApp et e-mail." },
-  { icon: Smartphone, title: "Accessible partout", desc: "Une plateforme responsive, consultable depuis votre téléphone, où que vous soyez." },
+  { icon: Users, title: "Gestion des membres", desc: "Inscription, suivi et gestion centralisée par les administrateurs désignés." },
+  { icon: HandCoins, title: "Cotisations solidaires", desc: "1 200 FCFA par décès déclaré, traçabilité totale des paiements." },
+  { icon: Heart, title: "Assistance décès", desc: "Versement rapide de 500 000 FCFA à la famille du défunt." },
+  { icon: ShieldCheck, title: "Assurance NSIA", desc: "Souscription et suivi du partenariat NSIA Décès intégrés." },
+  { icon: Bell, title: "Alertes SMS & WhatsApp", desc: "Notifications instantanées des décès, cotisations et assistances." },
+  { icon: ScanLine, title: "Carte QR vérifiable", desc: "Chaque membre dispose d'une carte avec QR code consultable publiquement." },
 ];
 
 function Index() {
+  const nav = useNavigate();
+  const [q, setQ] = useState("");
+
+  function onSearch(e: React.FormEvent) {
+    e.preventDefault();
+    const t = q.trim();
+    if (!t) return;
+    nav({ to: "/verifier/$matricule", params: { matricule: t } });
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
-      {/* HERO */}
       <section className="relative overflow-hidden border-b">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full bg-primary/10 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-40 -left-32 h-[400px] w-[400px] rounded-full bg-accent/10 blur-3xl"
-        />
-        <div className="container relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 md:grid-cols-2 md:py-28">
+        <div aria-hidden className="pointer-events-none absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full bg-primary/10 blur-3xl" />
+        <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-32 h-[400px] w-[400px] rounded-full bg-accent/10 blur-3xl" />
+        <div className="container relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 md:grid-cols-2 md:py-24">
           <div>
             <span className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
               Plateforme officielle
             </span>
-            <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-6xl">
-              La MUGEC-CI, <span className="text-primary">solidaire</span> et{" "}
-              <span className="text-accent">numérique</span>.
+            <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+              <span className="text-primary">ANZRBO</span> — l'entraide{" "}
+              <span className="text-accent">N'Zipris</span> de Bonon.
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-              Bienvenue sur votre plateforme officielle. Inscrivez-vous en ligne, réglez vos
-              cotisations, téléchargez votre carte de membre et restez connecté(e) à votre
-              mutuelle, où que vous soyez.
+            <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
+              Association d'assistance mutuelle au décès. Solidarité, transparence et accompagnement
+              des familles dans les moments difficiles.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
-                <Link to="/inscription">
-                  M'inscrire en ligne <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link to="/login">J'ai déjà un compte</Link>
-              </Button>
-              <Button asChild variant="secondary" size="lg">
                 <Link to="/scanner">
                   <ScanLine className="mr-2 h-4 w-4" /> Scanner un QR Code
                 </Link>
               </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link to="/contact">
+                  Nous contacter <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
+
+            <form onSubmit={onSearch} className="mt-6 flex max-w-md gap-2">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  placeholder="N° de membre (ex : ANZ-2026-0001)"
+                  className="pl-9"
+                />
+              </div>
+              <Button type="submit" variant="secondary">Vérifier</Button>
+            </form>
           </div>
+
           <div className="relative">
             <div className="rounded-2xl border bg-card p-8 shadow-xl">
-              <img src={logo} alt="MUGEC-CI" className="mx-auto h-32 w-auto" />
+              <img src={logo} alt="ANZRBO" className="mx-auto h-32 w-auto md:h-40" />
               <p className="mt-6 text-center text-sm italic text-muted-foreground">
-                « Mutuelle Générale du Personnel des Collectivités Territoriales de Côte d'Ivoire »
+                « Unis dans la solidarité, forts dans l'entraide »
               </p>
               <div className="mt-6 grid grid-cols-2 gap-4">
                 {stats.map((s) => (
                   <div key={s.label} className="rounded-lg bg-secondary/60 p-4 text-center">
-                    <div className="text-2xl font-bold text-primary">{s.value}</div>
+                    <div className="text-xl font-bold text-primary md:text-2xl">{s.value}</div>
                     <div className="text-xs text-muted-foreground">{s.label}</div>
                   </div>
                 ))}
@@ -90,15 +113,13 @@ function Index() {
         </div>
       </section>
 
-      {/* FEATURES */}
       <section className="container mx-auto max-w-7xl px-4 py-20">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-            Tous vos services en un seul espace
+            Une plateforme pensée pour l'association
           </h2>
           <p className="mt-3 text-muted-foreground">
-            La MUGEC-CI met à votre disposition une plateforme moderne, conçue pour vous, agents
-            des collectivités territoriales.
+            Gestion administrative complète, alertes en temps réel, traçabilité totale.
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -116,16 +137,18 @@ function Index() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="container mx-auto max-w-7xl px-4 pb-20">
-        <div className="rounded-2xl bg-gradient-to-br from-primary to-accent p-10 text-center text-white md:p-16">
-          <h2 className="text-3xl font-bold md:text-4xl">Inscrivez-vous dès maintenant à la MUGEC-CI</h2>
+        <div
+          className="rounded-2xl p-10 text-center text-white md:p-16"
+          style={{ background: "var(--gradient-primary)" }}
+        >
+          <h2 className="text-3xl font-bold md:text-4xl">Vous êtes administrateur ANZRBO ?</h2>
           <p className="mx-auto mt-3 max-w-2xl text-white/90">
-            Frais d'inscription uniques de 5 000 FCFA, payables par mobile money. Inscription en
-            moins de 5 minutes, sans déplacement.
+            Accédez à votre tableau de bord pour gérer les membres, les cotisations et les
+            assistances décès.
           </p>
           <Button asChild size="lg" variant="secondary" className="mt-6">
-            <Link to="/inscription">M'inscrire en ligne</Link>
+            <Link to="/login">Accès administrateur</Link>
           </Button>
         </div>
       </section>
