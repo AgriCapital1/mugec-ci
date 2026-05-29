@@ -73,15 +73,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ANZRBO — Association des N'Zipris Résidents de Bonon" },
+      { title: "ANZRBO — Association des N'Zipris Résidents à Bonon" },
       { name: "description", content: "Plateforme officielle ANZRBO : entraide, assistance au décès et solidarité — sous-préfecture de Bonon, Côte d'Ivoire." },
       { name: "author", content: "DigitOrg" },
-      { property: "og:title", content: "ANZRBO — Association des N'Zipris Résidents de Bonon" },
-      { property: "og:description", content: "Entraide et assistance mutuelle au décès — Bonon, Côte d'Ivoire." },
+      { property: "og:title", content: "ANZRBO — Association des N'Zipris Résidents à Bonon" },
+      { property: "og:description", content: "Plateforme officielle ANZRBO : entraide, assistance au décès et solidarité — sous-préfecture de Bonon, Côte d'Ivoire." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "ANZRBO — Association des N'Zipris Résidents de Bonon" },
-      { name: "twitter:description", content: "Entraide et assistance mutuelle au décès — Bonon, Côte d'Ivoire." },
+      { name: "twitter:title", content: "ANZRBO — Association des N'Zipris Résidents à Bonon" },
+      { name: "twitter:description", content: "Plateforme officielle ANZRBO : entraide, assistance au décès et solidarité — sous-préfecture de Bonon, Côte d'Ivoire." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/yC5ViC2eIIU0M4NDU6oPbHDs7pO2/social-images/social-1780086298389-187582.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/yC5ViC2eIIU0M4NDU6oPbHDs7pO2/social-images/social-1780086298389-187582.webp" },
     ],
     links: [
       {
