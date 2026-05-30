@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 import { toast } from "sonner";
-import logo from "@/assets/mugec-logo.png";
+import logo from "@/assets/anzrbo-logo.png";
 
 export const Route = createFileRoute("/login")({
   component: Page,
@@ -70,9 +70,9 @@ function Page() {
       <section className="container mx-auto max-w-md px-4 py-16">
         <Card>
           <CardContent className="p-8">
-            <img src={logo} alt="MUGEC-CI" className="mx-auto h-16" />
+            <img src={logo} alt="ANZRBO" className="mx-auto h-16" />
             <h1 className="mt-4 text-center text-2xl font-bold">Espace membre</h1>
-            <p className="mt-1 text-center text-sm text-muted-foreground">Connectez-vous à votre compte MUGEC-CI</p>
+            <p className="mt-1 text-center text-sm text-muted-foreground">Connectez-vous à votre compte ANZRBO</p>
             <form onSubmit={onSubmit} className="mt-6 space-y-4">
               {errorMsg && (
                 <div
@@ -91,7 +91,7 @@ function Page() {
                   required
                   value={identifier}
                   onChange={(e) => { setIdentifier(e.target.value); if (errorMsg) setErrorMsg(null); }}
-                  placeholder="Ex: 0758894363 ou adminmugec"
+                  placeholder="Ex: 0758894363 ou adminanzrbo"
                   aria-invalid={errorMsg ? true : undefined}
                   className={errorMsg ? "border-destructive focus-visible:ring-destructive" : undefined}
                 />
