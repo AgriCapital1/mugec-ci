@@ -130,7 +130,7 @@ function Page() {
   return (
     <MembreLayout
       title={`Bonjour, ${m.prenoms ?? "Membre"} 👋`}
-      subtitle="Voici l'état de votre adhésion à la MUGEC-CI"
+      subtitle="Voici l'état de votre adhésion à l'ANZRBO"
       actions={
         <Button asChild size="sm">
           <Link to="/membre/cotisations">
@@ -161,7 +161,7 @@ function Page() {
                   {m.fonction ?? "—"} · {m.collectivite ?? m.region ?? "—"}
                 </p>
                 <p className="mt-1 text-xs font-mono text-muted-foreground">
-                  {m.matricule ?? "Matricule en attente"}
+                  {m.telephone ?? "Téléphone en attente"}
                 </p>
               </div>
             </div>

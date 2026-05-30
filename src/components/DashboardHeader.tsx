@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import logo from "@/assets/mugec-logo.png";
+import logo from "@/assets/anzrbo-logo.png";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -44,7 +44,7 @@ export function DashboardHeader({
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between gap-3 px-4">
         <div className="flex items-center gap-3 min-w-0">
-          <img src={logo} alt="MUGEC-CI" className="h-14 w-auto" />
+          <img src={logo} alt="ANZRBO" className="h-14 w-auto" />
           <div className="hidden sm:block min-w-0">
             <div className="text-xs text-muted-foreground">Espace</div>
             <div className="text-sm font-semibold truncate">{title}</div>
