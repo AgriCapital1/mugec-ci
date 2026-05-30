@@ -21,7 +21,7 @@ import { Route as ActualitesRouteImport } from './routes/actualites'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MembreIndexRouteImport } from './routes/membre/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as VerifierMatriculeRouteImport } from './routes/verifier.$matricule'
+import { Route as VerifierTelephoneRouteImport } from './routes/verifier.$telephone'
 import { Route as MembreProfilRouteImport } from './routes/membre/profil'
 import { Route as MembreFicheRouteImport } from './routes/membre/fiche'
 import { Route as MembreDocumentsRouteImport } from './routes/membre/documents'
@@ -89,9 +89,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const VerifierMatriculeRoute = VerifierMatriculeRouteImport.update({
-  id: '/verifier/$matricule',
-  path: '/verifier/$matricule',
+const VerifierTelephoneRoute = VerifierTelephoneRouteImport.update({
+  id: '/verifier/$telephone',
+  path: '/verifier/$telephone',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MembreProfilRoute = MembreProfilRouteImport.update({
@@ -142,7 +142,7 @@ export interface FileRoutesByFullPath {
   '/membre/documents': typeof MembreDocumentsRoute
   '/membre/fiche': typeof MembreFicheRoute
   '/membre/profil': typeof MembreProfilRoute
-  '/verifier/$matricule': typeof VerifierMatriculeRoute
+  '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin/': typeof AdminIndexRoute
   '/membre/': typeof MembreIndexRoute
 }
@@ -163,7 +163,7 @@ export interface FileRoutesByTo {
   '/membre/documents': typeof MembreDocumentsRoute
   '/membre/fiche': typeof MembreFicheRoute
   '/membre/profil': typeof MembreProfilRoute
-  '/verifier/$matricule': typeof VerifierMatriculeRoute
+  '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin': typeof AdminIndexRoute
   '/membre': typeof MembreIndexRoute
 }
@@ -185,7 +185,7 @@ export interface FileRoutesById {
   '/membre/documents': typeof MembreDocumentsRoute
   '/membre/fiche': typeof MembreFicheRoute
   '/membre/profil': typeof MembreProfilRoute
-  '/verifier/$matricule': typeof VerifierMatriculeRoute
+  '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin/': typeof AdminIndexRoute
   '/membre/': typeof MembreIndexRoute
 }
@@ -208,7 +208,7 @@ export interface FileRouteTypes {
     | '/membre/documents'
     | '/membre/fiche'
     | '/membre/profil'
-    | '/verifier/$matricule'
+    | '/verifier/$telephone'
     | '/admin/'
     | '/membre/'
   fileRoutesByTo: FileRoutesByTo
@@ -229,7 +229,7 @@ export interface FileRouteTypes {
     | '/membre/documents'
     | '/membre/fiche'
     | '/membre/profil'
-    | '/verifier/$matricule'
+    | '/verifier/$telephone'
     | '/admin'
     | '/membre'
   id:
@@ -250,7 +250,7 @@ export interface FileRouteTypes {
     | '/membre/documents'
     | '/membre/fiche'
     | '/membre/profil'
-    | '/verifier/$matricule'
+    | '/verifier/$telephone'
     | '/admin/'
     | '/membre/'
   fileRoutesById: FileRoutesById
@@ -272,7 +272,7 @@ export interface RootRouteChildren {
   MembreDocumentsRoute: typeof MembreDocumentsRoute
   MembreFicheRoute: typeof MembreFicheRoute
   MembreProfilRoute: typeof MembreProfilRoute
-  VerifierMatriculeRoute: typeof VerifierMatriculeRoute
+  VerifierTelephoneRoute: typeof VerifierTelephoneRoute
   AdminIndexRoute: typeof AdminIndexRoute
   MembreIndexRoute: typeof MembreIndexRoute
 }
@@ -363,11 +363,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/verifier/$matricule': {
-      id: '/verifier/$matricule'
-      path: '/verifier/$matricule'
-      fullPath: '/verifier/$matricule'
-      preLoaderRoute: typeof VerifierMatriculeRouteImport
+    '/verifier/$telephone': {
+      id: '/verifier/$telephone'
+      path: '/verifier/$telephone'
+      fullPath: '/verifier/$telephone'
+      preLoaderRoute: typeof VerifierTelephoneRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/membre/profil': {
@@ -432,7 +432,7 @@ const rootRouteChildren: RootRouteChildren = {
   MembreDocumentsRoute: MembreDocumentsRoute,
   MembreFicheRoute: MembreFicheRoute,
   MembreProfilRoute: MembreProfilRoute,
-  VerifierMatriculeRoute: VerifierMatriculeRoute,
+  VerifierTelephoneRoute: VerifierTelephoneRoute,
   AdminIndexRoute: AdminIndexRoute,
   MembreIndexRoute: MembreIndexRoute,
 }
