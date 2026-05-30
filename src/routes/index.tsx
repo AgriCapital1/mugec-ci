@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, ScanLine, Search, ShieldCheck, Users, HandCoins, Heart, Bell } from "lucide-react";
+import { ArrowRight, Phone, ScanLine, Search, ShieldCheck, Users, HandCoins, Heart, Bell } from "lucide-react";
 import logo from "@/assets/anzrbo-logo.png";
 
 export const Route = createFileRoute("/")({
@@ -33,7 +33,7 @@ const features = [
   { icon: Heart, title: "Assistance décès", desc: "Versement rapide de 500 000 FCFA à la famille du défunt." },
   { icon: ShieldCheck, title: "Assurance NSIA", desc: "Souscription et suivi du partenariat NSIA Décès intégrés." },
   { icon: Bell, title: "Alertes SMS & WhatsApp", desc: "Notifications instantanées des décès, cotisations et assistances." },
-  { icon: ScanLine, title: "Carte QR vérifiable", desc: "Chaque membre dispose d'une carte avec QR code consultable publiquement." },
+  { icon: Phone, title: "Recherche par téléphone", desc: "Vérification simple par numéro de téléphone, prête pour la connexion Supabase." },
 ];
 
 function Index() {
@@ -44,7 +44,7 @@ function Index() {
     e.preventDefault();
     const t = q.trim();
     if (!t) return;
-    nav({ to: "/verifier/$matricule", params: { matricule: t } });
+    nav({ to: "/verifier/$telephone", params: { telephone: t } });
   }
 
   return (
@@ -86,7 +86,7 @@ function Index() {
                 <Input
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
-                  placeholder="N° de membre (ex : ANZ-2026-0001)"
+                  placeholder="Téléphone membre (ex : 07 58 89 43 63)"
                   className="pl-9"
                 />
               </div>
