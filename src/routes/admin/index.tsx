@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import {
-  MoreHorizontal, Eye, Users, Wallet, FileCheck, TrendingUp,
+  MoreHorizontal, Eye, Users, Wallet, FileCheck,
   UserCheck, UserMinus, Activity, ArrowUpRight, Search, Sparkles,
 } from "lucide-react";
 import {
@@ -31,7 +31,6 @@ type Stats = {
   members_total: number; members_actifs: number; members_en_attente: number;
   cotisations_mois: number; cotisations_total: number;
   prestations_en_cours: number; prestations_validees_mois: number;
-  transactions_miprojet_total: number;
 };
 type MemberRow = {
   id: string; matricule: string | null; nom: string; prenoms: string;
@@ -66,7 +65,7 @@ function AdminDashboard() {
       .range(page * PAGE, page * PAGE + PAGE - 1);
     if (search.trim()) {
       const s = `%${search.trim()}%`;
-      q = q.or(`nom.ilike.${s},prenoms.ilike.${s},telephone.ilike.${s},matricule.ilike.${s},email.ilike.${s}`);
+      q = q.or(`nom.ilike.${s},prenoms.ilike.${s},telephone.ilike.${s},email.ilike.${s}`);
     }
     const { data, error } = await q;
     if (error) toast.error(error.message);
@@ -139,7 +138,7 @@ function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/40">
-      <DashboardHeader title="Admin MUGEC-CI" nav={ADMIN_NAV} />
+      <DashboardHeader title="Admin ANZRBO" nav={ADMIN_NAV} />
 
       <main className="container mx-auto px-4 py-8 space-y-8 max-w-7xl">
         {/* Hero header */}
@@ -153,7 +152,7 @@ function AdminDashboard() {
               </Badge>
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Tableau de bord Admin</h1>
               <p className="mt-2 max-w-2xl text-sm text-white/80">
-                Pilotage en temps réel des membres, cotisations, prestations et opérations MiProjet.
+                Pilotage en temps réel des membres, cotisations et assistances de l'association.
               </p>
             </div>
             <div className="flex gap-2">
@@ -195,11 +194,6 @@ function AdminDashboard() {
           <PremiumKPI
             icon={FileCheck} label="Prest. validées (mois)" value={stats?.prestations_validees_mois ?? 0}
             gradient="from-teal-500 to-emerald-600"
-          />
-          <PremiumKPI
-            icon={TrendingUp} label="MiProjet"
-            value={`${((stats?.transactions_miprojet_total ?? 0) / 1000).toFixed(0)}k F`}
-            gradient="from-fuchsia-500 to-purple-600" trend="+5%"
           />
         </section>
 
@@ -281,7 +275,7 @@ function AdminDashboard() {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
-                  placeholder="Rechercher nom, matricule, téléphone…"
+                  placeholder="Rechercher nom, téléphone ou email…"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && (setPage(0), loadMembers())}
@@ -296,7 +290,6 @@ function AdminDashboard() {
               <TableHeader>
                 <TableRow className="hover:bg-transparent">
                   <TableHead className="w-12"></TableHead>
-                  <TableHead>Matricule</TableHead>
                   <TableHead>Nom</TableHead>
                   <TableHead>Téléphone</TableHead>
                   <TableHead>Statut</TableHead>
@@ -306,9 +299,9 @@ function AdminDashboard() {
               </TableHeader>
               <TableBody>
                 {loading ? (
-                  <TableRow><TableCell colSpan={7} className="text-center py-8 text-muted-foreground">Chargement…</TableCell></TableRow>
+                  <TableRow><TableCell colSpan={6} className="text-center py-8 text-muted-foreground">Chargement…</TableCell></TableRow>
                 ) : members.length === 0 ? (
-                  <TableRow><TableCell colSpan={7} className="text-center py-8 text-muted-foreground">Aucun membre</TableCell></TableRow>
+                  <TableRow><TableCell colSpan={6} className="text-center py-8 text-muted-foreground">Aucun membre</TableCell></TableRow>
                 ) : members.map((m) => (
                   <TableRow key={m.id} className="group">
                     <TableCell>
@@ -319,7 +312,6 @@ function AdminDashboard() {
                         </AvatarFallback>
                       </Avatar>
                     </TableCell>
-                    <TableCell className="font-mono text-xs">{m.matricule || "—"}</TableCell>
                     <TableCell className="whitespace-nowrap font-medium">{m.nom} {m.prenoms}</TableCell>
                     <TableCell className="text-muted-foreground">{m.telephone || "—"}</TableCell>
                     <TableCell><StatutBadge statut={m.statut} /></TableCell>
@@ -371,7 +363,6 @@ function AdminDashboard() {
                 </AvatarFallback>
               </Avatar>
               <dl className="grid grid-cols-2 gap-2 text-sm flex-1">
-                <D k="Matricule" v={selected.matricule || "—"} />
                 <D k="Nom" v={`${selected.nom} ${selected.prenoms}`} />
                 <D k="Email" v={selected.email || "—"} />
                 <D k="Téléphone" v={selected.telephone || "—"} />
