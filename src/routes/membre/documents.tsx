@@ -80,7 +80,7 @@ function Page() {
         <FeatureCard
           icon={FileText}
           title="Fiche officielle"
-          description="Téléchargez votre fiche d'inscription avec QR Code et filigrane MUGEC-CI."
+          description="Téléchargez votre fiche d'inscription avec QR Code et filigrane ANZRBO."
           to="/membre/carte"
           gradient="primary"
         />

@@ -81,7 +81,7 @@ function Page() {
                 <FileText className="h-7 w-7" />
               </div>
               <div>
-                <h2 className="text-xl font-semibold">Fiche d'adhésion MUGEC-CI</h2>
+                <h2 className="text-xl font-semibold">Fiche d'adhésion ANZRBO</h2>
                 <p className="text-sm text-muted-foreground">
                   Document A4 PDF reprenant l'ensemble de vos informations administratives, vos ayants-droit, votre photo et le cachet officiel.
                 </p>

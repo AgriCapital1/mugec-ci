@@ -382,7 +382,7 @@ function AdminDashboard() {
             <div className="grid gap-3 md:grid-cols-2">
               {[
                 "nom","prenoms","email","telephone","cni","adresse","photo_url",
-                "collectivite","region","direction","fonction","matricule_pro","matricule",
+                "collectivite","region","direction","fonction",
                 "sexe","lieu_naissance","date_naissance","date_embauche","ayants_droit",
                 "type_membre","validation_mode","payment_reference","suspended_reason",
               ].map((f) => (
