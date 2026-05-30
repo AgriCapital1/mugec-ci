@@ -11,13 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ScannerRouteImport } from './routes/scanner'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as OpportunitesRouteImport } from './routes/opportunites'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as InscriptionRouteImport } from './routes/inscription'
 import { Route as ForumRouteImport } from './routes/forum'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as ActualitesRouteImport } from './routes/actualites'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MembreIndexRouteImport } from './routes/membre/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
@@ -27,7 +25,6 @@ import { Route as MembreFicheRouteImport } from './routes/membre/fiche'
 import { Route as MembreDocumentsRouteImport } from './routes/membre/documents'
 import { Route as MembreCotisationsRouteImport } from './routes/membre/cotisations'
 import { Route as MembreCarteRouteImport } from './routes/membre/carte'
-import { Route as AdminMiprojetRouteImport } from './routes/admin/miprojet'
 
 const ScannerRoute = ScannerRouteImport.update({
   id: '/scanner',
@@ -37,11 +34,6 @@ const ScannerRoute = ScannerRouteImport.update({
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OpportunitesRoute = OpportunitesRouteImport.update({
-  id: '/opportunites',
-  path: '/opportunites',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -67,11 +59,6 @@ const FaqRoute = FaqRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ActualitesRoute = ActualitesRouteImport.update({
-  id: '/actualites',
-  path: '/actualites',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -119,24 +106,16 @@ const MembreCarteRoute = MembreCarteRouteImport.update({
   path: '/membre/carte',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminMiprojetRoute = AdminMiprojetRouteImport.update({
-  id: '/admin/miprojet',
-  path: '/admin/miprojet',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/actualites': typeof ActualitesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/forum': typeof ForumRoute
   '/inscription': typeof InscriptionRoute
   '/login': typeof LoginRoute
-  '/opportunites': typeof OpportunitesRoute
   '/reset-password': typeof ResetPasswordRoute
   '/scanner': typeof ScannerRoute
-  '/admin/miprojet': typeof AdminMiprojetRoute
   '/membre/carte': typeof MembreCarteRoute
   '/membre/cotisations': typeof MembreCotisationsRoute
   '/membre/documents': typeof MembreDocumentsRoute
@@ -148,16 +127,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/actualites': typeof ActualitesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/forum': typeof ForumRoute
   '/inscription': typeof InscriptionRoute
   '/login': typeof LoginRoute
-  '/opportunites': typeof OpportunitesRoute
   '/reset-password': typeof ResetPasswordRoute
   '/scanner': typeof ScannerRoute
-  '/admin/miprojet': typeof AdminMiprojetRoute
   '/membre/carte': typeof MembreCarteRoute
   '/membre/cotisations': typeof MembreCotisationsRoute
   '/membre/documents': typeof MembreDocumentsRoute
@@ -170,16 +146,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/actualites': typeof ActualitesRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/forum': typeof ForumRoute
   '/inscription': typeof InscriptionRoute
   '/login': typeof LoginRoute
-  '/opportunites': typeof OpportunitesRoute
   '/reset-password': typeof ResetPasswordRoute
   '/scanner': typeof ScannerRoute
-  '/admin/miprojet': typeof AdminMiprojetRoute
   '/membre/carte': typeof MembreCarteRoute
   '/membre/cotisations': typeof MembreCotisationsRoute
   '/membre/documents': typeof MembreDocumentsRoute
@@ -193,16 +166,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/actualites'
     | '/contact'
     | '/faq'
     | '/forum'
     | '/inscription'
     | '/login'
-    | '/opportunites'
     | '/reset-password'
     | '/scanner'
-    | '/admin/miprojet'
     | '/membre/carte'
     | '/membre/cotisations'
     | '/membre/documents'
@@ -214,16 +184,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/actualites'
     | '/contact'
     | '/faq'
     | '/forum'
     | '/inscription'
     | '/login'
-    | '/opportunites'
     | '/reset-password'
     | '/scanner'
-    | '/admin/miprojet'
     | '/membre/carte'
     | '/membre/cotisations'
     | '/membre/documents'
@@ -235,16 +202,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/actualites'
     | '/contact'
     | '/faq'
     | '/forum'
     | '/inscription'
     | '/login'
-    | '/opportunites'
     | '/reset-password'
     | '/scanner'
-    | '/admin/miprojet'
     | '/membre/carte'
     | '/membre/cotisations'
     | '/membre/documents'
@@ -257,16 +221,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ActualitesRoute: typeof ActualitesRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   ForumRoute: typeof ForumRoute
   InscriptionRoute: typeof InscriptionRoute
   LoginRoute: typeof LoginRoute
-  OpportunitesRoute: typeof OpportunitesRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ScannerRoute: typeof ScannerRoute
-  AdminMiprojetRoute: typeof AdminMiprojetRoute
   MembreCarteRoute: typeof MembreCarteRoute
   MembreCotisationsRoute: typeof MembreCotisationsRoute
   MembreDocumentsRoute: typeof MembreDocumentsRoute
@@ -291,13 +252,6 @@ declare module '@tanstack/react-router' {
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/opportunites': {
-      id: '/opportunites'
-      path: '/opportunites'
-      fullPath: '/opportunites'
-      preLoaderRoute: typeof OpportunitesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -333,13 +287,6 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/actualites': {
-      id: '/actualites'
-      path: '/actualites'
-      fullPath: '/actualites'
-      preLoaderRoute: typeof ActualitesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -405,28 +352,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MembreCarteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/miprojet': {
-      id: '/admin/miprojet'
-      path: '/admin/miprojet'
-      fullPath: '/admin/miprojet'
-      preLoaderRoute: typeof AdminMiprojetRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ActualitesRoute: ActualitesRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   ForumRoute: ForumRoute,
   InscriptionRoute: InscriptionRoute,
   LoginRoute: LoginRoute,
-  OpportunitesRoute: OpportunitesRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ScannerRoute: ScannerRoute,
-  AdminMiprojetRoute: AdminMiprojetRoute,
   MembreCarteRoute: MembreCarteRoute,
   MembreCotisationsRoute: MembreCotisationsRoute,
   MembreDocumentsRoute: MembreDocumentsRoute,
