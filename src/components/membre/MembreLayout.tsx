@@ -28,7 +28,7 @@ import {
   Home,
   Bell,
 } from "lucide-react";
-import logo from "@/assets/mugec-logo.png";
+import logo from "@/assets/anzrbo-logo.png";
 import { useAuth } from "@/lib/auth";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 
@@ -45,7 +45,7 @@ type MemberSummary = {
   nom?: string | null;
   prenoms?: string | null;
   photo_url?: string | null;
-  matricule?: string | null;
+  telephone?: string | null;
   statut?: string | null;
 };
 
@@ -63,13 +63,13 @@ function MemberSidebar({ me }: { me: MemberSummary | null }) {
     <Sidebar collapsible="icon" className="border-r">
       <SidebarHeader className="border-b px-3 py-4">
         <Link to="/membre" className="flex items-center gap-2 min-w-0">
-          <img src={logo} alt="MUGEC-CI" className="h-9 w-9 shrink-0 rounded-md object-contain" />
+          <img src={logo} alt="ANZRBO" className="h-9 w-9 shrink-0 rounded-md object-contain" />
           {!collapsed && (
             <div className="min-w-0">
               <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
                 Espace
               </div>
-              <div className="text-sm font-semibold truncate">Membre MUGEC-CI</div>
+              <div className="text-sm font-semibold truncate">Membre ANZRBO</div>
             </div>
           )}
         </Link>
@@ -128,7 +128,7 @@ function MemberSidebar({ me }: { me: MemberSummary | null }) {
                 {me?.prenoms ?? ""} {me?.nom ?? ""}
               </div>
               <div className="text-[11px] text-muted-foreground truncate font-mono">
-                {me?.matricule ?? user?.email ?? "—"}
+                {me?.telephone ?? user?.email ?? "—"}
               </div>
             </div>
           )}
@@ -176,7 +176,7 @@ export function MembreLayout({
     }
     supabase
       .from("members")
-      .select("nom, prenoms, photo_url, matricule, statut")
+      .select("nom, prenoms, photo_url, telephone, statut")
       .eq("user_id", user.id)
       .maybeSingle()
       .then(({ data }) => {
