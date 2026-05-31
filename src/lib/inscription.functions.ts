@@ -20,7 +20,7 @@ const memberSchema = z.object({
   matricule_pro: z.string().trim().max(50).optional().nullable(),
   date_embauche: z.string().optional().nullable(),
   ayants_droit: z.string().max(4000).optional().nullable(),
-  photo_url: z.string().max(2_000_000).optional().nullable(),
+  photo_url: z.string().url().max(2048).optional().nullable(),
   paiement_methode: z.enum(["orange", "mtn", "wave", "moov"]),
   payment_reference: z.string().min(3).max(80),
 });

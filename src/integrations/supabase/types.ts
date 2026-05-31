@@ -635,30 +635,51 @@ export type Database = {
         Row: {
           author_id: string | null
           body: string
+          category: string | null
           cover_url: string | null
           created_at: string
           id: string
+          illustrations: Json
+          meta_description: string | null
+          meta_title: string | null
           published: boolean
+          slug: string | null
+          summary: string | null
+          tags: string[]
           title: string
           updated_at: string
         }
         Insert: {
           author_id?: string | null
           body: string
+          category?: string | null
           cover_url?: string | null
           created_at?: string
           id?: string
+          illustrations?: Json
+          meta_description?: string | null
+          meta_title?: string | null
           published?: boolean
+          slug?: string | null
+          summary?: string | null
+          tags?: string[]
           title: string
           updated_at?: string
         }
         Update: {
           author_id?: string | null
           body?: string
+          category?: string | null
           cover_url?: string | null
           created_at?: string
           id?: string
+          illustrations?: Json
+          meta_description?: string | null
+          meta_title?: string | null
           published?: boolean
+          slug?: string | null
+          summary?: string | null
+          tags?: string[]
           title?: string
           updated_at?: string
         }
@@ -869,34 +890,61 @@ export type Database = {
       }
       opportunites: {
         Row: {
+          body: string | null
+          category: string | null
+          cover_url: string | null
           created_at: string
           date_limite: string | null
           description: string
           id: string
+          illustrations: Json
           lieu: string | null
+          meta_description: string | null
+          meta_title: string | null
           published: boolean
+          slug: string | null
+          summary: string | null
+          tags: string[]
           title: string
           type: string | null
           updated_at: string
         }
         Insert: {
+          body?: string | null
+          category?: string | null
+          cover_url?: string | null
           created_at?: string
           date_limite?: string | null
           description: string
           id?: string
+          illustrations?: Json
           lieu?: string | null
+          meta_description?: string | null
+          meta_title?: string | null
           published?: boolean
+          slug?: string | null
+          summary?: string | null
+          tags?: string[]
           title: string
           type?: string | null
           updated_at?: string
         }
         Update: {
+          body?: string | null
+          category?: string | null
+          cover_url?: string | null
           created_at?: string
           date_limite?: string | null
           description?: string
           id?: string
+          illustrations?: Json
           lieu?: string | null
+          meta_description?: string | null
+          meta_title?: string | null
           published?: boolean
+          slug?: string | null
+          summary?: string | null
+          tags?: string[]
           title?: string
           type?: string | null
           updated_at?: string
@@ -1478,7 +1526,15 @@ export type Database = {
         Args: { _date_inscription?: string; _type: string }
         Returns: number
       }
+      can_manage_member_financials: {
+        Args: { _user_id: string }
+        Returns: boolean
+      }
       can_manage_payments: { Args: { _user_id: string }; Returns: boolean }
+      consume_rate_limit: {
+        Args: { _bucket_key: string; _limit: number; _window_seconds: number }
+        Returns: Json
+      }
       current_user_dashboard_path: { Args: never; Returns: string }
       dashboard_path_for: { Args: { _user_id: string }; Returns: string }
       dashboard_sync_health: { Args: never; Returns: Json }
@@ -1511,8 +1567,6 @@ export type Database = {
       open_member_rights_after_90_days: { Args: never; Returns: number }
       resolve_login_email: { Args: { p_identifier: string }; Returns: string }
       role_for_prestation_step: { Args: { _step: number }; Returns: string }
-      show_limit: { Args: never; Returns: number }
-      show_trgm: { Args: { "": string }; Returns: string[] }
       validate_prestation_step: {
         Args: { _action: string; _motif?: string; _request_id: string }
         Returns: {
