@@ -12,8 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ScannerRouteImport } from './routes/scanner'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as InscriptionRouteImport } from './routes/inscription'
-import { Route as ForumRouteImport } from './routes/forum'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
@@ -25,6 +23,7 @@ import { Route as MembreFicheRouteImport } from './routes/membre/fiche'
 import { Route as MembreDocumentsRouteImport } from './routes/membre/documents'
 import { Route as MembreCotisationsRouteImport } from './routes/membre/cotisations'
 import { Route as MembreCarteRouteImport } from './routes/membre/carte'
+import { Route as AdminDigitorgRouteImport } from './routes/admin/digitorg'
 
 const ScannerRoute = ScannerRouteImport.update({
   id: '/scanner',
@@ -39,16 +38,6 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InscriptionRoute = InscriptionRouteImport.update({
-  id: '/inscription',
-  path: '/inscription',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForumRoute = ForumRouteImport.update({
-  id: '/forum',
-  path: '/forum',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -106,16 +95,20 @@ const MembreCarteRoute = MembreCarteRouteImport.update({
   path: '/membre/carte',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminDigitorgRoute = AdminDigitorgRouteImport.update({
+  id: '/admin/digitorg',
+  path: '/admin/digitorg',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/forum': typeof ForumRoute
-  '/inscription': typeof InscriptionRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/scanner': typeof ScannerRoute
+  '/admin/digitorg': typeof AdminDigitorgRoute
   '/membre/carte': typeof MembreCarteRoute
   '/membre/cotisations': typeof MembreCotisationsRoute
   '/membre/documents': typeof MembreDocumentsRoute
@@ -129,11 +122,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/forum': typeof ForumRoute
-  '/inscription': typeof InscriptionRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/scanner': typeof ScannerRoute
+  '/admin/digitorg': typeof AdminDigitorgRoute
   '/membre/carte': typeof MembreCarteRoute
   '/membre/cotisations': typeof MembreCotisationsRoute
   '/membre/documents': typeof MembreDocumentsRoute
@@ -148,11 +140,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/forum': typeof ForumRoute
-  '/inscription': typeof InscriptionRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/scanner': typeof ScannerRoute
+  '/admin/digitorg': typeof AdminDigitorgRoute
   '/membre/carte': typeof MembreCarteRoute
   '/membre/cotisations': typeof MembreCotisationsRoute
   '/membre/documents': typeof MembreDocumentsRoute
@@ -168,11 +159,10 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/faq'
-    | '/forum'
-    | '/inscription'
     | '/login'
     | '/reset-password'
     | '/scanner'
+    | '/admin/digitorg'
     | '/membre/carte'
     | '/membre/cotisations'
     | '/membre/documents'
@@ -186,11 +176,10 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/faq'
-    | '/forum'
-    | '/inscription'
     | '/login'
     | '/reset-password'
     | '/scanner'
+    | '/admin/digitorg'
     | '/membre/carte'
     | '/membre/cotisations'
     | '/membre/documents'
@@ -204,11 +193,10 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/faq'
-    | '/forum'
-    | '/inscription'
     | '/login'
     | '/reset-password'
     | '/scanner'
+    | '/admin/digitorg'
     | '/membre/carte'
     | '/membre/cotisations'
     | '/membre/documents'
@@ -223,11 +211,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
-  ForumRoute: typeof ForumRoute
-  InscriptionRoute: typeof InscriptionRoute
   LoginRoute: typeof LoginRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ScannerRoute: typeof ScannerRoute
+  AdminDigitorgRoute: typeof AdminDigitorgRoute
   MembreCarteRoute: typeof MembreCarteRoute
   MembreCotisationsRoute: typeof MembreCotisationsRoute
   MembreDocumentsRoute: typeof MembreDocumentsRoute
@@ -259,20 +246,6 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/inscription': {
-      id: '/inscription'
-      path: '/inscription'
-      fullPath: '/inscription'
-      preLoaderRoute: typeof InscriptionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forum': {
-      id: '/forum'
-      path: '/forum'
-      fullPath: '/forum'
-      preLoaderRoute: typeof ForumRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -352,6 +325,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MembreCarteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/digitorg': {
+      id: '/admin/digitorg'
+      path: '/admin/digitorg'
+      fullPath: '/admin/digitorg'
+      preLoaderRoute: typeof AdminDigitorgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -359,11 +339,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
-  ForumRoute: ForumRoute,
-  InscriptionRoute: InscriptionRoute,
   LoginRoute: LoginRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ScannerRoute: ScannerRoute,
+  AdminDigitorgRoute: AdminDigitorgRoute,
   MembreCarteRoute: MembreCarteRoute,
   MembreCotisationsRoute: MembreCotisationsRoute,
   MembreDocumentsRoute: MembreDocumentsRoute,

@@ -24,15 +24,8 @@ export function DashboardHeader({
 
   useEffect(() => { setMounted(true); }, []);
   useEffect(() => {
-    let active = true;
     if (!user) { setMe(null); return; }
-    supabase
-      .from("members")
-      .select("photo_url, nom, prenoms")
-      .eq("user_id", user.id)
-      .maybeSingle()
-      .then(({ data }) => { if (active) setMe(data as any); });
-    return () => { active = false; };
+    setMe({ photo_url: null, nom: user.nom, prenoms: user.prenoms });
   }, [user?.id]);
 
   const initials = mounted
@@ -116,5 +109,6 @@ export const MEMBRE_NAV: NavItem[] = [
 ];
 
 export const ADMIN_NAV: NavItem[] = [
-  { to: "/admin", label: "Tableau de bord" },
+  { to: "/admin/digitorg", label: "DigitOrg — Finances" },
+  { to: "/admin", label: "Gestion des membres" },
 ];

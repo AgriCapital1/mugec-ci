@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import logo from "@/assets/anzrbo-logo.png";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
 
 const nav = [
   { to: "/", label: "Accueil" },
@@ -11,9 +10,7 @@ const nav = [
 ];
 
 export function SiteHeader() {
-  const { user, signOut } = useAuth();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const { user, signOut, loading } = useAuth();
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4">
@@ -36,15 +33,15 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          {!mounted ? (
+          {loading ? (
             <div className="h-9 w-32" aria-hidden />
           ) : user ? (
             <>
-              <Button asChild variant="outline" size="sm"><Link to="/admin">Admin</Link></Button>
+              <Button asChild variant="outline" size="sm"><Link to="/admin/digitorg">Admin DigitOrg</Link></Button>
               <Button size="sm" variant="ghost" onClick={() => signOut()}>Déconnexion</Button>
             </>
           ) : (
-            <Button asChild variant="outline" size="sm"><Link to="/login">Connexion admin</Link></Button>
+            <Button asChild variant="outline" size="sm"><Link to="/login">Accès administrateur</Link></Button>
           )}
         </div>
       </div>
