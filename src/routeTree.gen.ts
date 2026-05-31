@@ -10,45 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ScannerRouteImport } from './routes/scanner'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as InscriptionRouteImport } from './routes/inscription'
-import { Route as ForumRouteImport } from './routes/forum'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as MembreIndexRouteImport } from './routes/membre/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as VerifierTelephoneRouteImport } from './routes/verifier.$telephone'
-import { Route as MembreProfilRouteImport } from './routes/membre/profil'
-import { Route as MembreFicheRouteImport } from './routes/membre/fiche'
-import { Route as MembreDocumentsRouteImport } from './routes/membre/documents'
-import { Route as MembreCotisationsRouteImport } from './routes/membre/cotisations'
-import { Route as MembreCarteRouteImport } from './routes/membre/carte'
+import { Route as AdminDigitorgRouteImport } from './routes/admin/digitorg'
 
 const ScannerRoute = ScannerRouteImport.update({
   id: '/scanner',
   path: '/scanner',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InscriptionRoute = InscriptionRouteImport.update({
-  id: '/inscription',
-  path: '/inscription',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForumRoute = ForumRouteImport.update({
-  id: '/forum',
-  path: '/forum',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -66,11 +43,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MembreIndexRoute = MembreIndexRouteImport.update({
-  id: '/membre/',
-  path: '/membre/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
@@ -81,29 +53,9 @@ const VerifierTelephoneRoute = VerifierTelephoneRouteImport.update({
   path: '/verifier/$telephone',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MembreProfilRoute = MembreProfilRouteImport.update({
-  id: '/membre/profil',
-  path: '/membre/profil',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MembreFicheRoute = MembreFicheRouteImport.update({
-  id: '/membre/fiche',
-  path: '/membre/fiche',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MembreDocumentsRoute = MembreDocumentsRouteImport.update({
-  id: '/membre/documents',
-  path: '/membre/documents',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MembreCotisationsRoute = MembreCotisationsRouteImport.update({
-  id: '/membre/cotisations',
-  path: '/membre/cotisations',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MembreCarteRoute = MembreCarteRouteImport.update({
-  id: '/membre/carte',
-  path: '/membre/carte',
+const AdminDigitorgRoute = AdminDigitorgRouteImport.update({
+  id: '/admin/digitorg',
+  path: '/admin/digitorg',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -111,56 +63,32 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/forum': typeof ForumRoute
-  '/inscription': typeof InscriptionRoute
   '/login': typeof LoginRoute
-  '/reset-password': typeof ResetPasswordRoute
   '/scanner': typeof ScannerRoute
-  '/membre/carte': typeof MembreCarteRoute
-  '/membre/cotisations': typeof MembreCotisationsRoute
-  '/membre/documents': typeof MembreDocumentsRoute
-  '/membre/fiche': typeof MembreFicheRoute
-  '/membre/profil': typeof MembreProfilRoute
+  '/admin/digitorg': typeof AdminDigitorgRoute
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin/': typeof AdminIndexRoute
-  '/membre/': typeof MembreIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/forum': typeof ForumRoute
-  '/inscription': typeof InscriptionRoute
   '/login': typeof LoginRoute
-  '/reset-password': typeof ResetPasswordRoute
   '/scanner': typeof ScannerRoute
-  '/membre/carte': typeof MembreCarteRoute
-  '/membre/cotisations': typeof MembreCotisationsRoute
-  '/membre/documents': typeof MembreDocumentsRoute
-  '/membre/fiche': typeof MembreFicheRoute
-  '/membre/profil': typeof MembreProfilRoute
+  '/admin/digitorg': typeof AdminDigitorgRoute
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin': typeof AdminIndexRoute
-  '/membre': typeof MembreIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/forum': typeof ForumRoute
-  '/inscription': typeof InscriptionRoute
   '/login': typeof LoginRoute
-  '/reset-password': typeof ResetPasswordRoute
   '/scanner': typeof ScannerRoute
-  '/membre/carte': typeof MembreCarteRoute
-  '/membre/cotisations': typeof MembreCotisationsRoute
-  '/membre/documents': typeof MembreDocumentsRoute
-  '/membre/fiche': typeof MembreFicheRoute
-  '/membre/profil': typeof MembreProfilRoute
+  '/admin/digitorg': typeof AdminDigitorgRoute
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin/': typeof AdminIndexRoute
-  '/membre/': typeof MembreIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -168,74 +96,42 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/faq'
-    | '/forum'
-    | '/inscription'
     | '/login'
-    | '/reset-password'
     | '/scanner'
-    | '/membre/carte'
-    | '/membre/cotisations'
-    | '/membre/documents'
-    | '/membre/fiche'
-    | '/membre/profil'
+    | '/admin/digitorg'
     | '/verifier/$telephone'
     | '/admin/'
-    | '/membre/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/contact'
     | '/faq'
-    | '/forum'
-    | '/inscription'
     | '/login'
-    | '/reset-password'
     | '/scanner'
-    | '/membre/carte'
-    | '/membre/cotisations'
-    | '/membre/documents'
-    | '/membre/fiche'
-    | '/membre/profil'
+    | '/admin/digitorg'
     | '/verifier/$telephone'
     | '/admin'
-    | '/membre'
   id:
     | '__root__'
     | '/'
     | '/contact'
     | '/faq'
-    | '/forum'
-    | '/inscription'
     | '/login'
-    | '/reset-password'
     | '/scanner'
-    | '/membre/carte'
-    | '/membre/cotisations'
-    | '/membre/documents'
-    | '/membre/fiche'
-    | '/membre/profil'
+    | '/admin/digitorg'
     | '/verifier/$telephone'
     | '/admin/'
-    | '/membre/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
-  ForumRoute: typeof ForumRoute
-  InscriptionRoute: typeof InscriptionRoute
   LoginRoute: typeof LoginRoute
-  ResetPasswordRoute: typeof ResetPasswordRoute
   ScannerRoute: typeof ScannerRoute
-  MembreCarteRoute: typeof MembreCarteRoute
-  MembreCotisationsRoute: typeof MembreCotisationsRoute
-  MembreDocumentsRoute: typeof MembreDocumentsRoute
-  MembreFicheRoute: typeof MembreFicheRoute
-  MembreProfilRoute: typeof MembreProfilRoute
+  AdminDigitorgRoute: typeof AdminDigitorgRoute
   VerifierTelephoneRoute: typeof VerifierTelephoneRoute
   AdminIndexRoute: typeof AdminIndexRoute
-  MembreIndexRoute: typeof MembreIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -247,32 +143,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ScannerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/inscription': {
-      id: '/inscription'
-      path: '/inscription'
-      fullPath: '/inscription'
-      preLoaderRoute: typeof InscriptionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forum': {
-      id: '/forum'
-      path: '/forum'
-      fullPath: '/forum'
-      preLoaderRoute: typeof ForumRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -296,13 +171,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/membre/': {
-      id: '/membre/'
-      path: '/membre'
-      fullPath: '/membre/'
-      preLoaderRoute: typeof MembreIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin/': {
       id: '/admin/'
       path: '/admin'
@@ -317,39 +185,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifierTelephoneRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/membre/profil': {
-      id: '/membre/profil'
-      path: '/membre/profil'
-      fullPath: '/membre/profil'
-      preLoaderRoute: typeof MembreProfilRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/membre/fiche': {
-      id: '/membre/fiche'
-      path: '/membre/fiche'
-      fullPath: '/membre/fiche'
-      preLoaderRoute: typeof MembreFicheRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/membre/documents': {
-      id: '/membre/documents'
-      path: '/membre/documents'
-      fullPath: '/membre/documents'
-      preLoaderRoute: typeof MembreDocumentsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/membre/cotisations': {
-      id: '/membre/cotisations'
-      path: '/membre/cotisations'
-      fullPath: '/membre/cotisations'
-      preLoaderRoute: typeof MembreCotisationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/membre/carte': {
-      id: '/membre/carte'
-      path: '/membre/carte'
-      fullPath: '/membre/carte'
-      preLoaderRoute: typeof MembreCarteRouteImport
+    '/admin/digitorg': {
+      id: '/admin/digitorg'
+      path: '/admin/digitorg'
+      fullPath: '/admin/digitorg'
+      preLoaderRoute: typeof AdminDigitorgRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -359,19 +199,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
-  ForumRoute: ForumRoute,
-  InscriptionRoute: InscriptionRoute,
   LoginRoute: LoginRoute,
-  ResetPasswordRoute: ResetPasswordRoute,
   ScannerRoute: ScannerRoute,
-  MembreCarteRoute: MembreCarteRoute,
-  MembreCotisationsRoute: MembreCotisationsRoute,
-  MembreDocumentsRoute: MembreDocumentsRoute,
-  MembreFicheRoute: MembreFicheRoute,
-  MembreProfilRoute: MembreProfilRoute,
+  AdminDigitorgRoute: AdminDigitorgRoute,
   VerifierTelephoneRoute: VerifierTelephoneRoute,
   AdminIndexRoute: AdminIndexRoute,
-  MembreIndexRoute: MembreIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

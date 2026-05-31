@@ -1,64 +1,47 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, ShieldCheck } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+import { useAuth } from "@/lib/auth";
 import { toast } from "sonner";
 import logo from "@/assets/anzrbo-logo.png";
 
 export const Route = createFileRoute("/login")({
   component: Page,
+  head: () => ({
+    meta: [
+      { title: "Accès administrateur — ANZRBO" },
+      { name: "description", content: "Connexion réservée aux administrateurs ANZRBO." },
+    ],
+  }),
 });
 
 function Page() {
+  const { signIn } = useAuth();
+  const nav = useNavigate();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  async function resolveEmail(input: string): Promise<string | null> {
-    const v = input.trim();
-    if (v.includes("@")) return v;
-    const { data, error } = await supabase.rpc("resolve_login_email", { p_identifier: v });
-    if (error) return null;
-    return typeof data === "string" && data.length > 0 ? data : null;
-  }
-
-  async function onSubmit(e: React.FormEvent) {
+  function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setErrorMsg(null);
-    if (!isSupabaseConfigured) {
-      setErrorMsg("Lovable Cloud / Supabase n'est pas encore connecté.");
-      return;
-    }
     setLoading(true);
     try {
-      const email = await resolveEmail(identifier);
-      if (!email) {
-        setErrorMsg("Identifiant ou mot de passe incorrect, veuillez réessayer.");
+      const u = signIn(identifier, password);
+      if (!u) {
+        setErrorMsg("Identifiant ou mot de passe incorrect.");
         return;
       }
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) {
-        // Toujours afficher un message générique pour ne pas révéler quel champ est faux
-        setErrorMsg("Identifiant ou mot de passe incorrect, veuillez réessayer.");
-        return;
-      }
-      let target = "/membre";
-      try {
-        const { data: path } = await supabase.rpc("current_user_dashboard_path");
-        if (typeof path === "string" && path.length > 0) target = path;
-      } catch {
-        // garde /membre par défaut
-      }
-      toast.success("Bienvenue !");
-      window.location.assign(target);
+      toast.success("Bienvenue, administrateur ANZRBO.");
+      nav({ to: "/admin/digitorg" });
     } finally {
       setLoading(false);
     }
@@ -71,8 +54,14 @@ function Page() {
         <Card>
           <CardContent className="p-8">
             <img src={logo} alt="ANZRBO" className="mx-auto h-16" />
-            <h1 className="mt-4 text-center text-2xl font-bold">Espace membre</h1>
-            <p className="mt-1 text-center text-sm text-muted-foreground">Connectez-vous à votre compte ANZRBO</p>
+            <div className="mt-4 flex items-center justify-center gap-2 text-primary">
+              <ShieldCheck className="h-4 w-4" />
+              <span className="text-xs font-semibold uppercase tracking-wider">Espace réservé</span>
+            </div>
+            <h1 className="mt-2 text-center text-2xl font-bold">Accès administrateur</h1>
+            <p className="mt-1 text-center text-sm text-muted-foreground">
+              Connectez-vous pour gérer les membres, cotisations et assistances ANZRBO.
+            </p>
             <form onSubmit={onSubmit} className="mt-6 space-y-4">
               {errorMsg && (
                 <div
@@ -84,16 +73,15 @@ function Page() {
                 </div>
               )}
               <div>
-                <Label htmlFor="identifier">Identifiant (numéro de téléphone ou identifiant admin)</Label>
+                <Label htmlFor="identifier">Numéro de téléphone</Label>
                 <Input
                   id="identifier"
-                  type="text"
+                  type="tel"
                   required
                   value={identifier}
                   onChange={(e) => { setIdentifier(e.target.value); if (errorMsg) setErrorMsg(null); }}
-                  placeholder="Ex: 0758894363 ou adminanzrbo"
-                  aria-invalid={errorMsg ? true : undefined}
-                  className={errorMsg ? "border-destructive focus-visible:ring-destructive" : undefined}
+                  placeholder="Ex : 0759566087"
+                  autoComplete="username"
                 />
               </div>
               <div>
@@ -105,8 +93,8 @@ function Page() {
                     required
                     value={password}
                     onChange={(e) => { setPassword(e.target.value); if (errorMsg) setErrorMsg(null); }}
-                    className={`pr-10 ${errorMsg ? "border-destructive focus-visible:ring-destructive" : ""}`}
-                    aria-invalid={errorMsg ? true : undefined}
+                    className="pr-10"
+                    autoComplete="current-password"
                   />
                   <button
                     type="button"
@@ -123,9 +111,6 @@ function Page() {
                 {loading ? "Connexion…" : "Se connecter"}
               </Button>
             </form>
-            <p className="mt-6 text-center text-sm text-muted-foreground">
-              Pas encore membre ? <Link to="/inscription" className="text-primary underline">S'inscrire</Link>
-            </p>
           </CardContent>
         </Card>
       </section>
@@ -133,4 +118,3 @@ function Page() {
     </div>
   );
 }
-

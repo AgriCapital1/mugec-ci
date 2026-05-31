@@ -1,11 +1,9 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { ArrowRight, Phone, ScanLine, Search, ShieldCheck, Users, HandCoins, Heart, Bell } from "lucide-react";
+import { ArrowRight, ScanLine, Users, HandCoins, Heart, ShieldCheck, Bell, BadgeCheck } from "lucide-react";
 import logo from "@/assets/anzrbo-logo.png";
 
 export const Route = createFileRoute("/")({
@@ -13,9 +11,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "ANZRBO — Association des N'Zipris Résidents de Bonon" },
-      { name: "description", content: "Plateforme officielle ANZRBO : entraide, assistance au décès et solidarité pour les N'Zipris résidents de Bonon." },
+      { name: "description", content: "ANZRBO — Entraide et assistance mutuelle au décès des N'Zipris résidents de la sous-préfecture de Bonon, Côte d'Ivoire." },
       { property: "og:title", content: "ANZRBO — Association des N'Zipris Résidents de Bonon" },
-      { property: "og:description", content: "Entraide et assistance mutuelle — Bonon, Côte d'Ivoire." },
+      { property: "og:description", content: "Solidarité, entraide et assistance au décès — Bonon, Côte d'Ivoire." },
     ],
   }),
 });
@@ -28,25 +26,15 @@ const stats = [
 ];
 
 const features = [
-  { icon: Users, title: "Gestion des membres", desc: "Inscription, suivi et gestion centralisée par les administrateurs désignés." },
-  { icon: HandCoins, title: "Cotisations solidaires", desc: "1 200 FCFA par décès déclaré, traçabilité totale des paiements." },
-  { icon: Heart, title: "Assistance décès", desc: "Versement rapide de 500 000 FCFA à la famille du défunt." },
-  { icon: ShieldCheck, title: "Assurance NSIA", desc: "Souscription et suivi du partenariat NSIA Décès intégrés." },
-  { icon: Bell, title: "Alertes SMS & WhatsApp", desc: "Notifications instantanées des décès, cotisations et assistances." },
-  { icon: Phone, title: "Recherche par téléphone", desc: "Vérification simple par numéro de téléphone, prête pour la connexion Supabase." },
+  { icon: Users, title: "Gestion des membres", desc: "Enregistrement et suivi assurés exclusivement par les administrateurs désignés de l'association." },
+  { icon: HandCoins, title: "Cotisations solidaires", desc: "1 200 FCFA collectés à chaque décès déclaré, avec traçabilité complète des versements." },
+  { icon: Heart, title: "Assistance décès", desc: "500 000 FCFA versés sans délai à la famille du défunt, membre principal ou ayant droit." },
+  { icon: ShieldCheck, title: "Assurance NSIA", desc: "Souscription et suivi du partenariat NSIA Décès intégrés à la plateforme." },
+  { icon: Bell, title: "Alertes SMS & WhatsApp", desc: "Notifications instantanées des décès déclarés, cotisations à payer et assistances versées." },
+  { icon: BadgeCheck, title: "Carte membre & QR Code", desc: "Carte membre générée automatiquement avec QR Code pour consultation publique simplifiée." },
 ];
 
 function Index() {
-  const nav = useNavigate();
-  const [q, setQ] = useState("");
-
-  function onSearch(e: React.FormEvent) {
-    e.preventDefault();
-    const t = q.trim();
-    if (!t) return;
-    nav({ to: "/verifier/$telephone", params: { telephone: t } });
-  }
-
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
@@ -57,15 +45,15 @@ function Index() {
         <div className="container relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 md:grid-cols-2 md:py-24">
           <div>
             <span className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-              Plateforme officielle
+              Association d'entraide
             </span>
             <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
               <span className="text-primary">ANZRBO</span> — l'entraide{" "}
               <span className="text-accent">N'Zipris</span> de Bonon.
             </h1>
             <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-              Association d'assistance mutuelle au décès. Solidarité, transparence et accompagnement
-              des familles dans les moments difficiles.
+              Association des N'Zipris Résidents de Bonon. Solidarité, transparence et accompagnement
+              des familles dans les moments difficiles, sous-préfecture de Bonon, Côte d'Ivoire.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
@@ -79,19 +67,9 @@ function Index() {
                 </Link>
               </Button>
             </div>
-
-            <form onSubmit={onSearch} className="mt-6 flex max-w-md gap-2">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  value={q}
-                  onChange={(e) => setQ(e.target.value)}
-                  placeholder="Téléphone membre (ex : 07 58 89 43 63)"
-                  className="pl-9"
-                />
-              </div>
-              <Button type="submit" variant="secondary">Vérifier</Button>
-            </form>
+            <p className="mt-6 text-xs text-muted-foreground">
+              L'inscription d'un membre est effectuée uniquement par un administrateur ANZRBO.
+            </p>
           </div>
 
           <div className="relative">
