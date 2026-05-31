@@ -100,13 +100,6 @@ export function DashboardHeader({
   );
 }
 
-export const MEMBRE_NAV: NavItem[] = [
-  { to: "/membre", label: "Tableau de bord" },
-  { to: "/membre/profil", label: "Profil" },
-  { to: "/membre/carte", label: "Carte" },
-  { to: "/membre/documents", label: "Documents" },
-  { to: "/membre/cotisations", label: "Cotisations" },
-];
 
 export const ADMIN_NAV: NavItem[] = [
   { to: "/admin/digitorg", label: "DigitOrg — Finances" },
