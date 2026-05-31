@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ScannerRouteImport } from './routes/scanner'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -22,11 +21,6 @@ import { Route as AdminDigitorgRouteImport } from './routes/admin/digitorg'
 const ScannerRoute = ScannerRouteImport.update({
   id: '/scanner',
   path: '/scanner',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -70,7 +64,6 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
-  '/reset-password': typeof ResetPasswordRoute
   '/scanner': typeof ScannerRoute
   '/admin/digitorg': typeof AdminDigitorgRoute
   '/verifier/$telephone': typeof VerifierTelephoneRoute
@@ -81,7 +74,6 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
-  '/reset-password': typeof ResetPasswordRoute
   '/scanner': typeof ScannerRoute
   '/admin/digitorg': typeof AdminDigitorgRoute
   '/verifier/$telephone': typeof VerifierTelephoneRoute
@@ -93,7 +85,6 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
-  '/reset-password': typeof ResetPasswordRoute
   '/scanner': typeof ScannerRoute
   '/admin/digitorg': typeof AdminDigitorgRoute
   '/verifier/$telephone': typeof VerifierTelephoneRoute
@@ -106,7 +97,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/login'
-    | '/reset-password'
     | '/scanner'
     | '/admin/digitorg'
     | '/verifier/$telephone'
@@ -117,7 +107,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/login'
-    | '/reset-password'
     | '/scanner'
     | '/admin/digitorg'
     | '/verifier/$telephone'
@@ -128,7 +117,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/login'
-    | '/reset-password'
     | '/scanner'
     | '/admin/digitorg'
     | '/verifier/$telephone'
@@ -140,7 +128,6 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   LoginRoute: typeof LoginRoute
-  ResetPasswordRoute: typeof ResetPasswordRoute
   ScannerRoute: typeof ScannerRoute
   AdminDigitorgRoute: typeof AdminDigitorgRoute
   VerifierTelephoneRoute: typeof VerifierTelephoneRoute
@@ -154,13 +141,6 @@ declare module '@tanstack/react-router' {
       path: '/scanner'
       fullPath: '/scanner'
       preLoaderRoute: typeof ScannerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -220,7 +200,6 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   LoginRoute: LoginRoute,
-  ResetPasswordRoute: ResetPasswordRoute,
   ScannerRoute: ScannerRoute,
   AdminDigitorgRoute: AdminDigitorgRoute,
   VerifierTelephoneRoute: VerifierTelephoneRoute,
