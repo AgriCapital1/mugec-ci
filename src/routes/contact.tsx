@@ -8,7 +8,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, Loader2, CheckCircle2 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/contact")({
@@ -38,27 +37,13 @@ function Page() {
     if (!/^\S+@\S+\.\S+$/.test(form.email)) { setErr("E-mail invalide."); return; }
     if (form.message.trim().length < 5) { setErr("Votre message est trop court."); return; }
     setBusy(true);
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      const { error } = await supabase.from("contact_messages").insert({
-        nom: form.nom.trim(),
-        email: form.email.trim(),
-        telephone: form.telephone.trim() || null,
-        sujet: form.sujet.trim() || null,
-        message: form.message.trim(),
-        user_id: user?.id ?? null,
-      });
-      if (error) throw error;
+    // Envoi local (UI uniquement, sans base de données)
+    setTimeout(() => {
       setSent(true);
-      toast.success("Message envoyé avec succès");
+      toast.success("Message envoyé. L'association vous recontactera par SMS / WhatsApp.");
       setForm({ nom: "", email: "", telephone: "", sujet: "", message: "" });
-    } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : "Erreur lors de l'envoi.";
-      setErr(msg);
-      toast.error("L'envoi a échoué");
-    } finally {
       setBusy(false);
-    }
+    }, 400);
   }
 
   return (
