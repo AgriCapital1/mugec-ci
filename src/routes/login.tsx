@@ -16,7 +16,7 @@ export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
       { title: "Accès administrateur — ANZRBO" },
-      { name: "description", content: "Connexion réservée aux administrateurs ANZRBO." },
+      { name: "description", content: "Connexion réservée aux administrateurs ANZRBO, DigitOrg et au partenaire NSIA." },
     ],
   }),
 });
@@ -27,24 +27,15 @@ function Page() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setErrorMsg(null);
-    setLoading(true);
-    try {
-      const u = signIn(identifier, password);
-      if (!u) {
-        setErrorMsg("Identifiant ou mot de passe incorrect.");
-        return;
-      }
-      toast.success("Bienvenue, administrateur ANZRBO.");
-      nav({ to: "/admin/digitorg" });
-    } finally {
-      setLoading(false);
-    }
+    const u = signIn(identifier, password);
+    if (!u) { setErrorMsg("Identifiant ou mot de passe incorrect."); return; }
+    toast.success(`Bienvenue, ${u.prenoms} ${u.nom}.`);
+    nav({ to: u.home });
   }
 
   return (
@@ -58,48 +49,35 @@ function Page() {
               <ShieldCheck className="h-4 w-4" />
               <span className="text-xs font-semibold uppercase tracking-wider">Espace réservé</span>
             </div>
-            <h1 className="mt-2 text-center text-2xl font-bold">Accès administrateur</h1>
+            <h1 className="mt-2 text-center text-2xl font-bold">Connexion</h1>
             <p className="mt-1 text-center text-sm text-muted-foreground">
-              Connectez-vous pour gérer les membres, cotisations et assistances ANZRBO.
+              Espace administrateurs ANZRBO, DigitOrg et partenaire NSIA.
             </p>
             <form onSubmit={onSubmit} className="mt-6 space-y-4">
               {errorMsg && (
-                <div
-                  role="alert"
-                  aria-live="assertive"
-                  className="rounded-md border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm font-medium text-destructive"
-                >
+                <div role="alert" className="rounded-md border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm font-medium text-destructive">
                   {errorMsg}
                 </div>
               )}
               <div>
-                <Label htmlFor="identifier">Numéro de téléphone</Label>
+                <Label htmlFor="identifier">Identifiant</Label>
                 <Input
-                  id="identifier"
-                  type="tel"
-                  required
-                  value={identifier}
+                  id="identifier" type="text" required value={identifier}
                   onChange={(e) => { setIdentifier(e.target.value); if (errorMsg) setErrorMsg(null); }}
-                  placeholder="Ex : 0759566087"
-                  autoComplete="username"
+                  placeholder="Téléphone ou identifiant" autoComplete="username"
                 />
               </div>
               <div>
                 <Label htmlFor="password">Mot de passe</Label>
                 <div className="relative">
                   <Input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    required
-                    value={password}
+                    id="password" type={showPassword ? "text" : "password"} required value={password}
                     onChange={(e) => { setPassword(e.target.value); if (errorMsg) setErrorMsg(null); }}
-                    className="pr-10"
-                    autoComplete="current-password"
+                    className="pr-10" autoComplete="current-password"
                   />
                   <button
-                    type="button"
-                    onClick={() => setShowPassword((v) => !v)}
-                    aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                    type="button" onClick={() => setShowPassword((v) => !v)}
+                    aria-label={showPassword ? "Masquer" : "Afficher"}
                     className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
                     tabIndex={-1}
                   >
@@ -107,10 +85,17 @@ function Page() {
                   </button>
                 </div>
               </div>
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Connexion…" : "Se connecter"}
-              </Button>
+              <Button type="submit" className="w-full">Se connecter</Button>
             </form>
+
+            <div className="mt-6 rounded-md bg-muted/40 p-3 text-xs text-muted-foreground">
+              <p className="font-semibold text-foreground">Comptes de démonstration</p>
+              <ul className="mt-1 space-y-0.5">
+                <li>Admin ANZRBO : <span className="font-mono">0759566087</span> / 12345678 → /admin</li>
+                <li>DigitOrg : <span className="font-mono">admin</span> / 12345678 → /digitorg</li>
+                <li>Partenaire NSIA : <span className="font-mono">nsia</span> / 12345678 → /nsia</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
       </section>

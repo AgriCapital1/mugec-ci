@@ -16,7 +16,6 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as VerifierTelephoneRouteImport } from './routes/verifier.$telephone'
-import { Route as AdminDigitorgRouteImport } from './routes/admin/digitorg'
 
 const ScannerRoute = ScannerRouteImport.update({
   id: '/scanner',
@@ -53,11 +52,6 @@ const VerifierTelephoneRoute = VerifierTelephoneRouteImport.update({
   path: '/verifier/$telephone',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminDigitorgRoute = AdminDigitorgRouteImport.update({
-  id: '/admin/digitorg',
-  path: '/admin/digitorg',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -65,7 +59,6 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/scanner': typeof ScannerRoute
-  '/admin/digitorg': typeof AdminDigitorgRoute
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -75,7 +68,6 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/scanner': typeof ScannerRoute
-  '/admin/digitorg': typeof AdminDigitorgRoute
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -86,7 +78,6 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/login': typeof LoginRoute
   '/scanner': typeof ScannerRoute
-  '/admin/digitorg': typeof AdminDigitorgRoute
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -98,7 +89,6 @@ export interface FileRouteTypes {
     | '/faq'
     | '/login'
     | '/scanner'
-    | '/admin/digitorg'
     | '/verifier/$telephone'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -108,7 +98,6 @@ export interface FileRouteTypes {
     | '/faq'
     | '/login'
     | '/scanner'
-    | '/admin/digitorg'
     | '/verifier/$telephone'
     | '/admin'
   id:
@@ -118,7 +107,6 @@ export interface FileRouteTypes {
     | '/faq'
     | '/login'
     | '/scanner'
-    | '/admin/digitorg'
     | '/verifier/$telephone'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -129,7 +117,6 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   LoginRoute: typeof LoginRoute
   ScannerRoute: typeof ScannerRoute
-  AdminDigitorgRoute: typeof AdminDigitorgRoute
   VerifierTelephoneRoute: typeof VerifierTelephoneRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
@@ -185,13 +172,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifierTelephoneRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/digitorg': {
-      id: '/admin/digitorg'
-      path: '/admin/digitorg'
-      fullPath: '/admin/digitorg'
-      preLoaderRoute: typeof AdminDigitorgRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -201,7 +181,6 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   LoginRoute: LoginRoute,
   ScannerRoute: ScannerRoute,
-  AdminDigitorgRoute: AdminDigitorgRoute,
   VerifierTelephoneRoute: VerifierTelephoneRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
