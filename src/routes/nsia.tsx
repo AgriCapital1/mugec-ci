@@ -34,7 +34,7 @@ function NsiaDashboard() {
     SOUSCRIPTIONS_NSIA.forEach((s) => map.set(s.formule, (map.get(s.formule) ?? 0) + 1));
     return Array.from(map.entries()).map(([formule, count]) => ({
       name: `Formule ${formule}`, value: count,
-      color: ["#4f46e5", "#06b6d4", "#10b981", "#f59e0b", "#ef4444", "#ec4899"][formule % 6],
+      color: ["#1d4ed8", "#0369a1", "#0284c7", "#0ea5e9", "#3b82f6", "#6366f1", "#1e40af", "#0891b2", "#2563eb", "#075985"][(formule - 1) % 10],
     }));
   }, []);
 
