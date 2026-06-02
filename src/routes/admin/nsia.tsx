@@ -1,11 +1,13 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { DashboardHeader, ADMIN_NAV } from "@/components/DashboardHeader";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useAuth } from "@/lib/auth";
 import { SOUSCRIPTIONS_NSIA, PAIEMENTS_NSIA, DECLARATIONS, FORMULES_NSIA, membre } from "@/lib/data";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, Plus } from "lucide-react";
+
 
 export const Route = createFileRoute("/admin/nsia")({
   component: Page,
@@ -34,10 +36,16 @@ function Page() {
         </div>
 
         <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2"><ShieldCheck className="h-5 w-5 text-primary" /> Souscriptions NSIA Décès</CardTitle>
-            <CardDescription>1 seule formule active à la fois par membre. Renouvellement chaque décembre.</CardDescription>
+          <CardHeader className="flex flex-row items-start justify-between gap-4">
+            <div>
+              <CardTitle className="flex items-center gap-2"><ShieldCheck className="h-5 w-5 text-blue-600" /> Souscriptions NSIA Décès</CardTitle>
+              <CardDescription>1 seule formule active à la fois par membre. Renouvellement chaque décembre.</CardDescription>
+            </div>
+            <Button asChild className="bg-blue-600 hover:bg-blue-700">
+              <Link to="/admin/nsia/nouveau"><Plus className="mr-1 h-4 w-4" /> Souscrire un membre</Link>
+            </Button>
           </CardHeader>
+
           <CardContent className="overflow-x-auto">
             <Table>
               <TableHeader><TableRow>
