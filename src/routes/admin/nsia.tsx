@@ -1,11 +1,13 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { DashboardHeader, ADMIN_NAV } from "@/components/DashboardHeader";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useAuth } from "@/lib/auth";
 import { SOUSCRIPTIONS_NSIA, PAIEMENTS_NSIA, DECLARATIONS, FORMULES_NSIA, membre } from "@/lib/data";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, Plus } from "lucide-react";
+
 
 export const Route = createFileRoute("/admin/nsia")({
   component: Page,
