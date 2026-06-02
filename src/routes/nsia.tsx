@@ -148,8 +148,8 @@ function NsiaDashboard() {
                       <TableCell>{m.prenoms} {m.nom}</TableCell>
                       <TableCell>{new Date(p.date).toLocaleDateString("fr-FR")}</TableCell>
                       <TableCell>{p.beneficeBrut.toLocaleString("fr-FR")} F</TableCell>
-                      <TableCell className="text-amber-700 font-semibold">{p.commissionAssoc.toLocaleString("fr-FR")} F</TableCell>
-                      <TableCell className="text-emerald-700 font-semibold">{p.netFamille.toLocaleString("fr-FR")} F</TableCell>
+                      <TableCell className="font-semibold text-primary">{p.commissionAssoc.toLocaleString("fr-FR")} F</TableCell>
+                      <TableCell className="font-semibold text-accent">{p.netFamille.toLocaleString("fr-FR")} F</TableCell>
                     </TableRow>
                   );
                 })}
@@ -184,10 +184,10 @@ function NsiaDashboard() {
   );
 }
 
-function KPI({ icon: Icon, label, value, gradient, trend }: { icon: any; label: string; value: any; gradient: string; trend?: string }) {
+function KPI({ icon: Icon, label, value, trend }: { icon: any; label: string; value: any; trend?: string }) {
   return (
     <Card className="relative overflow-hidden border-0 shadow-md">
-      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-[0.08]`} />
+      <div className="absolute inset-0 bg-[image:var(--nsia-gradient-soft)]" />
       <CardContent className="relative p-5">
         <div className="flex items-start justify-between">
           <div className="space-y-1 min-w-0">
@@ -195,7 +195,7 @@ function KPI({ icon: Icon, label, value, gradient, trend }: { icon: any; label: 
             <div className="text-xl font-bold tracking-tight">{value}</div>
             {trend && <div className="text-xs text-muted-foreground">{trend}</div>}
           </div>
-          <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${gradient} text-white shadow-lg`}>
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[image:var(--nsia-gradient-strong)] text-primary-foreground shadow-lg">
             <Icon className="h-5 w-5" />
           </div>
         </div>
