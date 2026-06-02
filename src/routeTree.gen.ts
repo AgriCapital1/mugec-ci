@@ -21,6 +21,7 @@ import { Route as VerifierTelephoneRouteImport } from './routes/verifier.$teleph
 import { Route as AdminNsiaRouteImport } from './routes/admin/nsia'
 import { Route as AdminCotisationsRouteImport } from './routes/admin/cotisations'
 import { Route as AdminAssistancesRouteImport } from './routes/admin/assistances'
+import { Route as AdminNsiaIndexRouteImport } from './routes/admin/nsia.index'
 import { Route as AdminMembresIndexRouteImport } from './routes/admin/membres.index'
 import { Route as AdminNsiaNouveauRouteImport } from './routes/admin/nsia.nouveau'
 import { Route as AdminMembresNouveauRouteImport } from './routes/admin/membres.nouveau'
@@ -85,6 +86,11 @@ const AdminAssistancesRoute = AdminAssistancesRouteImport.update({
   path: '/admin/assistances',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminNsiaIndexRoute = AdminNsiaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminNsiaRoute,
+} as any)
 const AdminMembresIndexRoute = AdminMembresIndexRouteImport.update({
   id: '/admin/membres/',
   path: '/admin/membres/',
@@ -117,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/admin/membres/nouveau': typeof AdminMembresNouveauRoute
   '/admin/nsia/nouveau': typeof AdminNsiaNouveauRoute
   '/admin/membres/': typeof AdminMembresIndexRoute
+  '/admin/nsia/': typeof AdminNsiaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -128,12 +135,12 @@ export interface FileRoutesByTo {
   '/scanner': typeof ScannerRoute
   '/admin/assistances': typeof AdminAssistancesRoute
   '/admin/cotisations': typeof AdminCotisationsRoute
-  '/admin/nsia': typeof AdminNsiaRouteWithChildren
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin': typeof AdminIndexRoute
   '/admin/membres/nouveau': typeof AdminMembresNouveauRoute
   '/admin/nsia/nouveau': typeof AdminNsiaNouveauRoute
   '/admin/membres': typeof AdminMembresIndexRoute
+  '/admin/nsia': typeof AdminNsiaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -152,6 +159,7 @@ export interface FileRoutesById {
   '/admin/membres/nouveau': typeof AdminMembresNouveauRoute
   '/admin/nsia/nouveau': typeof AdminNsiaNouveauRoute
   '/admin/membres/': typeof AdminMembresIndexRoute
+  '/admin/nsia/': typeof AdminNsiaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -171,6 +179,7 @@ export interface FileRouteTypes {
     | '/admin/membres/nouveau'
     | '/admin/nsia/nouveau'
     | '/admin/membres/'
+    | '/admin/nsia/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -182,12 +191,12 @@ export interface FileRouteTypes {
     | '/scanner'
     | '/admin/assistances'
     | '/admin/cotisations'
-    | '/admin/nsia'
     | '/verifier/$telephone'
     | '/admin'
     | '/admin/membres/nouveau'
     | '/admin/nsia/nouveau'
     | '/admin/membres'
+    | '/admin/nsia'
   id:
     | '__root__'
     | '/'
@@ -205,6 +214,7 @@ export interface FileRouteTypes {
     | '/admin/membres/nouveau'
     | '/admin/nsia/nouveau'
     | '/admin/membres/'
+    | '/admin/nsia/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -310,6 +320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAssistancesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/nsia/': {
+      id: '/admin/nsia/'
+      path: '/'
+      fullPath: '/admin/nsia/'
+      preLoaderRoute: typeof AdminNsiaIndexRouteImport
+      parentRoute: typeof AdminNsiaRoute
+    }
     '/admin/membres/': {
       id: '/admin/membres/'
       path: '/admin/membres'
@@ -336,10 +353,12 @@ declare module '@tanstack/react-router' {
 
 interface AdminNsiaRouteChildren {
   AdminNsiaNouveauRoute: typeof AdminNsiaNouveauRoute
+  AdminNsiaIndexRoute: typeof AdminNsiaIndexRoute
 }
 
 const AdminNsiaRouteChildren: AdminNsiaRouteChildren = {
   AdminNsiaNouveauRoute: AdminNsiaNouveauRoute,
+  AdminNsiaIndexRoute: AdminNsiaIndexRoute,
 }
 
 const AdminNsiaRouteWithChildren = AdminNsiaRoute._addFileChildren(

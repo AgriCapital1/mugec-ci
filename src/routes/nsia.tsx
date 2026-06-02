@@ -32,26 +32,27 @@ function NsiaDashboard() {
   const repFormules = useMemo(() => {
     const map = new Map<number, number>();
     SOUSCRIPTIONS_NSIA.forEach((s) => map.set(s.formule, (map.get(s.formule) ?? 0) + 1));
+    const colors = ["var(--nsia-chart-1)", "var(--nsia-chart-2)", "var(--nsia-chart-3)", "var(--nsia-chart-4)", "var(--nsia-chart-5)"];
     return Array.from(map.entries()).map(([formule, count]) => ({
       name: `Formule ${formule}`, value: count,
-      color: ["#1d4ed8", "#0369a1", "#0284c7", "#0ea5e9", "#3b82f6", "#6366f1", "#1e40af", "#0891b2", "#2563eb", "#075985"][(formule - 1) % 10],
+      color: colors[(formule - 1) % colors.length],
     }));
   }, []);
 
   if (loading || !user) return <div className="flex min-h-screen items-center justify-center text-muted-foreground">Chargement…</div>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-background to-sky-50">
+    <div className="nsia-theme min-h-screen bg-[image:var(--nsia-page-bg)]">
       <DashboardHeader title="NSIA — Espace partenaire" nav={NSIA_NAV} />
       <main className="container mx-auto max-w-7xl space-y-8 px-4 py-8">
-        <section className="relative overflow-hidden rounded-3xl border bg-gradient-to-br from-blue-600 via-blue-700 to-sky-700 p-8 text-white shadow-xl">
-          <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+        <section className="relative overflow-hidden rounded-3xl border bg-[image:var(--nsia-gradient-strong)] p-8 text-primary-foreground shadow-xl">
+          <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-primary-foreground/10 blur-3xl" />
           <div className="relative">
-            <Badge variant="secondary" className="mb-3 gap-1 border-white/20 bg-white/15 text-white">
+            <Badge variant="secondary" className="mb-3 gap-1 border-primary-foreground/20 bg-primary-foreground/15 text-primary-foreground">
               <Sparkles className="h-3 w-3" /> Partenariat NSIA Décès
             </Badge>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Tableau de bord partenaire NSIA</h1>
-            <p className="mt-2 max-w-2xl text-sm text-white/85">
+            <p className="mt-2 max-w-2xl text-sm text-primary-foreground/85">
               Suivi des souscriptions, des cotisations annuelles et des bénéfices versés au titre du contrat décès
               conclu avec l'Association des N'Zipris Résidents à Bonon (ANZRBO).
             </p>
@@ -60,10 +61,10 @@ function NsiaDashboard() {
 
 
         <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
-          <KPI icon={Users} label="Souscriptions actives" value={SOUSCRIPTIONS_NSIA.length} gradient="from-blue-500 to-indigo-600" />
-          <KPI icon={Wallet} label="Cotisations annuelles" value={`${totalCot.toLocaleString("fr-FR")} F`} gradient="from-sky-500 to-blue-600" />
-          <KPI icon={HandCoins} label="Bénéfices versés" value={`${totalVerses.toLocaleString("fr-FR")} F`} gradient="from-blue-600 to-cyan-600" trend={`${PAIEMENTS_NSIA.length} sinistres réglés`} />
-          <KPI icon={ShieldCheck} label="Commission ANZRBO 25%" value={`${commissionAssoc.toLocaleString("fr-FR")} F`} gradient="from-indigo-500 to-blue-700" trend={`Net familles : ${netFamilles.toLocaleString("fr-FR")} F`} />
+          <KPI icon={Users} label="Souscriptions actives" value={SOUSCRIPTIONS_NSIA.length} />
+          <KPI icon={Wallet} label="Cotisations annuelles" value={`${totalCot.toLocaleString("fr-FR")} F`} />
+          <KPI icon={HandCoins} label="Bénéfices versés" value={`${totalVerses.toLocaleString("fr-FR")} F`} trend={`${PAIEMENTS_NSIA.length} sinistres réglés`} />
+          <KPI icon={ShieldCheck} label="Commission ANZRBO 25%" value={`${commissionAssoc.toLocaleString("fr-FR")} F`} trend={`Net familles : ${netFamilles.toLocaleString("fr-FR")} F`} />
         </section>
 
 
@@ -147,8 +148,8 @@ function NsiaDashboard() {
                       <TableCell>{m.prenoms} {m.nom}</TableCell>
                       <TableCell>{new Date(p.date).toLocaleDateString("fr-FR")}</TableCell>
                       <TableCell>{p.beneficeBrut.toLocaleString("fr-FR")} F</TableCell>
-                      <TableCell className="text-amber-700 font-semibold">{p.commissionAssoc.toLocaleString("fr-FR")} F</TableCell>
-                      <TableCell className="text-emerald-700 font-semibold">{p.netFamille.toLocaleString("fr-FR")} F</TableCell>
+                      <TableCell className="font-semibold text-primary">{p.commissionAssoc.toLocaleString("fr-FR")} F</TableCell>
+                      <TableCell className="font-semibold text-accent">{p.netFamille.toLocaleString("fr-FR")} F</TableCell>
                     </TableRow>
                   );
                 })}
@@ -183,10 +184,10 @@ function NsiaDashboard() {
   );
 }
 
-function KPI({ icon: Icon, label, value, gradient, trend }: { icon: any; label: string; value: any; gradient: string; trend?: string }) {
+function KPI({ icon: Icon, label, value, trend }: { icon: any; label: string; value: any; trend?: string }) {
   return (
     <Card className="relative overflow-hidden border-0 shadow-md">
-      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-[0.08]`} />
+      <div className="absolute inset-0 bg-[image:var(--nsia-gradient-soft)]" />
       <CardContent className="relative p-5">
         <div className="flex items-start justify-between">
           <div className="space-y-1 min-w-0">
@@ -194,7 +195,7 @@ function KPI({ icon: Icon, label, value, gradient, trend }: { icon: any; label: 
             <div className="text-xl font-bold tracking-tight">{value}</div>
             {trend && <div className="text-xs text-muted-foreground">{trend}</div>}
           </div>
-          <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${gradient} text-white shadow-lg`}>
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[image:var(--nsia-gradient-strong)] text-primary-foreground shadow-lg">
             <Icon className="h-5 w-5" />
           </div>
         </div>

@@ -131,7 +131,7 @@ function Page() {
               </div>
 
               <div className="flex justify-end gap-2 pt-2">
-                <Button asChild type="button" variant="outline"><Link to="/admin/nsia">Annuler</Link></Button>
+                <Button asChild variant="outline"><Link to="/admin/nsia">Annuler</Link></Button>
                 <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
                   <CheckCircle2 className="mr-2 h-4 w-4" /> Enregistrer la souscription
                 </Button>
