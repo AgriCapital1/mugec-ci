@@ -22,6 +22,7 @@ import { Route as AdminNsiaRouteImport } from './routes/admin/nsia'
 import { Route as AdminCotisationsRouteImport } from './routes/admin/cotisations'
 import { Route as AdminAssistancesRouteImport } from './routes/admin/assistances'
 import { Route as AdminMembresIndexRouteImport } from './routes/admin/membres.index'
+import { Route as AdminNsiaNouveauRouteImport } from './routes/admin/nsia.nouveau'
 import { Route as AdminMembresNouveauRouteImport } from './routes/admin/membres.nouveau'
 
 const ScannerRoute = ScannerRouteImport.update({
@@ -89,6 +90,11 @@ const AdminMembresIndexRoute = AdminMembresIndexRouteImport.update({
   path: '/admin/membres/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminNsiaNouveauRoute = AdminNsiaNouveauRouteImport.update({
+  id: '/nouveau',
+  path: '/nouveau',
+  getParentRoute: () => AdminNsiaRoute,
+} as any)
 const AdminMembresNouveauRoute = AdminMembresNouveauRouteImport.update({
   id: '/admin/membres/nouveau',
   path: '/admin/membres/nouveau',
@@ -105,10 +111,11 @@ export interface FileRoutesByFullPath {
   '/scanner': typeof ScannerRoute
   '/admin/assistances': typeof AdminAssistancesRoute
   '/admin/cotisations': typeof AdminCotisationsRoute
-  '/admin/nsia': typeof AdminNsiaRoute
+  '/admin/nsia': typeof AdminNsiaRouteWithChildren
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/membres/nouveau': typeof AdminMembresNouveauRoute
+  '/admin/nsia/nouveau': typeof AdminNsiaNouveauRoute
   '/admin/membres/': typeof AdminMembresIndexRoute
 }
 export interface FileRoutesByTo {
@@ -121,10 +128,11 @@ export interface FileRoutesByTo {
   '/scanner': typeof ScannerRoute
   '/admin/assistances': typeof AdminAssistancesRoute
   '/admin/cotisations': typeof AdminCotisationsRoute
-  '/admin/nsia': typeof AdminNsiaRoute
+  '/admin/nsia': typeof AdminNsiaRouteWithChildren
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin': typeof AdminIndexRoute
   '/admin/membres/nouveau': typeof AdminMembresNouveauRoute
+  '/admin/nsia/nouveau': typeof AdminNsiaNouveauRoute
   '/admin/membres': typeof AdminMembresIndexRoute
 }
 export interface FileRoutesById {
@@ -138,10 +146,11 @@ export interface FileRoutesById {
   '/scanner': typeof ScannerRoute
   '/admin/assistances': typeof AdminAssistancesRoute
   '/admin/cotisations': typeof AdminCotisationsRoute
-  '/admin/nsia': typeof AdminNsiaRoute
+  '/admin/nsia': typeof AdminNsiaRouteWithChildren
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/membres/nouveau': typeof AdminMembresNouveauRoute
+  '/admin/nsia/nouveau': typeof AdminNsiaNouveauRoute
   '/admin/membres/': typeof AdminMembresIndexRoute
 }
 export interface FileRouteTypes {
@@ -160,6 +169,7 @@ export interface FileRouteTypes {
     | '/verifier/$telephone'
     | '/admin/'
     | '/admin/membres/nouveau'
+    | '/admin/nsia/nouveau'
     | '/admin/membres/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/verifier/$telephone'
     | '/admin'
     | '/admin/membres/nouveau'
+    | '/admin/nsia/nouveau'
     | '/admin/membres'
   id:
     | '__root__'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '/verifier/$telephone'
     | '/admin/'
     | '/admin/membres/nouveau'
+    | '/admin/nsia/nouveau'
     | '/admin/membres/'
   fileRoutesById: FileRoutesById
 }
@@ -205,7 +217,7 @@ export interface RootRouteChildren {
   ScannerRoute: typeof ScannerRoute
   AdminAssistancesRoute: typeof AdminAssistancesRoute
   AdminCotisationsRoute: typeof AdminCotisationsRoute
-  AdminNsiaRoute: typeof AdminNsiaRoute
+  AdminNsiaRoute: typeof AdminNsiaRouteWithChildren
   VerifierTelephoneRoute: typeof VerifierTelephoneRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminMembresNouveauRoute: typeof AdminMembresNouveauRoute
@@ -305,6 +317,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminMembresIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/nsia/nouveau': {
+      id: '/admin/nsia/nouveau'
+      path: '/nouveau'
+      fullPath: '/admin/nsia/nouveau'
+      preLoaderRoute: typeof AdminNsiaNouveauRouteImport
+      parentRoute: typeof AdminNsiaRoute
+    }
     '/admin/membres/nouveau': {
       id: '/admin/membres/nouveau'
       path: '/admin/membres/nouveau'
@@ -314,6 +333,18 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AdminNsiaRouteChildren {
+  AdminNsiaNouveauRoute: typeof AdminNsiaNouveauRoute
+}
+
+const AdminNsiaRouteChildren: AdminNsiaRouteChildren = {
+  AdminNsiaNouveauRoute: AdminNsiaNouveauRoute,
+}
+
+const AdminNsiaRouteWithChildren = AdminNsiaRoute._addFileChildren(
+  AdminNsiaRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -325,7 +356,7 @@ const rootRouteChildren: RootRouteChildren = {
   ScannerRoute: ScannerRoute,
   AdminAssistancesRoute: AdminAssistancesRoute,
   AdminCotisationsRoute: AdminCotisationsRoute,
-  AdminNsiaRoute: AdminNsiaRoute,
+  AdminNsiaRoute: AdminNsiaRouteWithChildren,
   VerifierTelephoneRoute: VerifierTelephoneRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminMembresNouveauRoute: AdminMembresNouveauRoute,
