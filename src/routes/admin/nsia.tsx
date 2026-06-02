@@ -36,10 +36,16 @@ function Page() {
         </div>
 
         <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2"><ShieldCheck className="h-5 w-5 text-primary" /> Souscriptions NSIA Décès</CardTitle>
-            <CardDescription>1 seule formule active à la fois par membre. Renouvellement chaque décembre.</CardDescription>
+          <CardHeader className="flex flex-row items-start justify-between gap-4">
+            <div>
+              <CardTitle className="flex items-center gap-2"><ShieldCheck className="h-5 w-5 text-blue-600" /> Souscriptions NSIA Décès</CardTitle>
+              <CardDescription>1 seule formule active à la fois par membre. Renouvellement chaque décembre.</CardDescription>
+            </div>
+            <Button asChild className="bg-blue-600 hover:bg-blue-700">
+              <Link to="/admin/nsia/nouveau"><Plus className="mr-1 h-4 w-4" /> Souscrire un membre</Link>
+            </Button>
           </CardHeader>
+
           <CardContent className="overflow-x-auto">
             <Table>
               <TableHeader><TableRow>
