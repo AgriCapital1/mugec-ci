@@ -41,10 +41,10 @@ function NsiaDashboard() {
   if (loading || !user) return <div className="flex min-h-screen items-center justify-center text-muted-foreground">Chargement…</div>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/40">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-background to-sky-50">
       <DashboardHeader title="NSIA — Espace partenaire" nav={NSIA_NAV} />
       <main className="container mx-auto max-w-7xl space-y-8 px-4 py-8">
-        <section className="relative overflow-hidden rounded-3xl border bg-gradient-to-br from-red-600 via-red-700 to-rose-700 p-8 text-white shadow-xl">
+        <section className="relative overflow-hidden rounded-3xl border bg-gradient-to-br from-blue-600 via-blue-700 to-sky-700 p-8 text-white shadow-xl">
           <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
           <div className="relative">
             <Badge variant="secondary" className="mb-3 gap-1 border-white/20 bg-white/15 text-white">
@@ -57,6 +57,7 @@ function NsiaDashboard() {
             </p>
           </div>
         </section>
+
 
         <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
           <KPI icon={Users} label="Souscriptions actives" value={SOUSCRIPTIONS_NSIA.length} gradient="from-blue-500 to-indigo-600" />
