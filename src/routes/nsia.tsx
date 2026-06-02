@@ -61,10 +61,11 @@ function NsiaDashboard() {
 
         <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
           <KPI icon={Users} label="Souscriptions actives" value={SOUSCRIPTIONS_NSIA.length} gradient="from-blue-500 to-indigo-600" />
-          <KPI icon={Wallet} label="Cotisations annuelles" value={`${totalCot.toLocaleString("fr-FR")} F`} gradient="from-emerald-500 to-green-600" />
-          <KPI icon={HandCoins} label="Bénéfices versés" value={`${totalVerses.toLocaleString("fr-FR")} F`} gradient="from-rose-500 to-red-600" trend={`${PAIEMENTS_NSIA.length} sinistres réglés`} />
-          <KPI icon={ShieldCheck} label="Commission ANZRBO 25%" value={`${commissionAssoc.toLocaleString("fr-FR")} F`} gradient="from-amber-500 to-orange-600" trend={`Net familles : ${netFamilles.toLocaleString("fr-FR")} F`} />
+          <KPI icon={Wallet} label="Cotisations annuelles" value={`${totalCot.toLocaleString("fr-FR")} F`} gradient="from-sky-500 to-blue-600" />
+          <KPI icon={HandCoins} label="Bénéfices versés" value={`${totalVerses.toLocaleString("fr-FR")} F`} gradient="from-blue-600 to-cyan-600" trend={`${PAIEMENTS_NSIA.length} sinistres réglés`} />
+          <KPI icon={ShieldCheck} label="Commission ANZRBO 25%" value={`${commissionAssoc.toLocaleString("fr-FR")} F`} gradient="from-indigo-500 to-blue-700" trend={`Net familles : ${netFamilles.toLocaleString("fr-FR")} F`} />
         </section>
+
 
         <section className="grid gap-4 lg:grid-cols-3">
           <Card className="border-0 shadow-md lg:col-span-2">
