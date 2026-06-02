@@ -53,7 +53,7 @@ function NsiaDashboard() {
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Tableau de bord partenaire NSIA</h1>
             <p className="mt-2 max-w-2xl text-sm text-white/85">
               Suivi des souscriptions, des cotisations annuelles et des bénéfices versés au titre du contrat décès
-              conclu avec l'Association des N'Zipris Résidents de Bonon (ANZRBO).
+              conclu avec l'Association des N'Zipris Résidents à Bonon (ANZRBO).
             </p>
           </div>
         </section>

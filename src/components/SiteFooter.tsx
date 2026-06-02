@@ -7,7 +7,7 @@ export function SiteFooter() {
         <div>
           <img src={logo} alt="ANZRBO" className="h-12 w-auto" />
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">
-            Association des N'Zipris Résidents de Bonon — Entraide et assistance mutuelle au décès, sous-préfecture de Bonon, Côte d'Ivoire.
+            Association des N'Zipris Résidents à Bonon — Entraide et assistance mutuelle au décès, sous-préfecture de Bonon, Côte d'Ivoire.
           </p>
         </div>
         <div>

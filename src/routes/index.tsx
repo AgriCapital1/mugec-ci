@@ -10,9 +10,9 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "ANZRBO — Association des N'Zipris Résidents de Bonon" },
+      { title: "ANZRBO — Association des N'Zipris Résidents à Bonon" },
       { name: "description", content: "ANZRBO — Entraide et assistance mutuelle au décès des N'Zipris résidents de la sous-préfecture de Bonon, Côte d'Ivoire." },
-      { property: "og:title", content: "ANZRBO — Association des N'Zipris Résidents de Bonon" },
+      { property: "og:title", content: "ANZRBO — Association des N'Zipris Résidents à Bonon" },
       { property: "og:description", content: "Solidarité, entraide et assistance au décès — Bonon, Côte d'Ivoire." },
     ],
   }),
@@ -52,7 +52,7 @@ function Index() {
               <span className="text-accent">N'Zipris</span> de Bonon.
             </h1>
             <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-              Association des N'Zipris Résidents de Bonon. Solidarité, transparence et accompagnement
+              Association des N'Zipris Résidents à Bonon. Solidarité, transparence et accompagnement
               des familles dans les moments difficiles, sous-préfecture de Bonon, Côte d'Ivoire.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
