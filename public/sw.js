@@ -4,15 +4,14 @@ const CACHE_VERSION = "anzrbo-v3";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
-const STATIC_ASSETS = [
-  "/",
-  "/manifest.webmanifest",
-  "/favicon.ico",
-];
+const STATIC_ASSETS = ["/", "/manifest.webmanifest", "/favicon.ico"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(STATIC_CACHE).then((c) => c.addAll(STATIC_ASSETS)).then(() => self.skipWaiting())
+    caches
+      .open(STATIC_CACHE)
+      .then((c) => c.addAll(STATIC_ASSETS))
+      .then(() => self.skipWaiting()),
   );
 });
 
@@ -21,10 +20,10 @@ self.addEventListener("activate", (event) => {
     (async () => {
       const keys = await caches.keys();
       await Promise.all(
-        keys.filter((k) => !k.startsWith(CACHE_VERSION)).map((k) => caches.delete(k))
+        keys.filter((k) => !k.startsWith(CACHE_VERSION)).map((k) => caches.delete(k)),
       );
       await self.clients.claim();
-    })()
+    })(),
   );
 });
 
@@ -56,7 +55,7 @@ self.addEventListener("fetch", (event) => {
           const cached = await caches.match(req);
           return cached || caches.match("/") || new Response("Hors ligne", { status: 503 });
         }
-      })()
+      })(),
     );
     return;
   }
@@ -73,7 +72,7 @@ self.addEventListener("fetch", (event) => {
             return res;
           })
           .catch(() => cached);
-      })
+      }),
     );
   }
 });
