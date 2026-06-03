@@ -1,18 +1,17 @@
-// MUGEC-CI Service Worker — cache offline pour le portail public.
+// ANZRBO Service Worker — cache offline pour le portail public.
 // Stratégie : network-first pour les navigations (HTML), cache-first pour les assets statiques.
-const CACHE_VERSION = "mugec-v2";
+const CACHE_VERSION = "anzrbo-v3";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
-const STATIC_ASSETS = [
-  "/",
-  "/manifest.webmanifest",
-  "/favicon.ico",
-];
+const STATIC_ASSETS = ["/", "/manifest.webmanifest", "/favicon.ico"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(STATIC_CACHE).then((c) => c.addAll(STATIC_ASSETS)).then(() => self.skipWaiting())
+    caches
+      .open(STATIC_CACHE)
+      .then((c) => c.addAll(STATIC_ASSETS))
+      .then(() => self.skipWaiting()),
   );
 });
 
@@ -21,10 +20,10 @@ self.addEventListener("activate", (event) => {
     (async () => {
       const keys = await caches.keys();
       await Promise.all(
-        keys.filter((k) => !k.startsWith(CACHE_VERSION)).map((k) => caches.delete(k))
+        keys.filter((k) => !k.startsWith(CACHE_VERSION)).map((k) => caches.delete(k)),
       );
       await self.clients.claim();
-    })()
+    })(),
   );
 });
 
@@ -56,7 +55,7 @@ self.addEventListener("fetch", (event) => {
           const cached = await caches.match(req);
           return cached || caches.match("/") || new Response("Hors ligne", { status: 503 });
         }
-      })()
+      })(),
     );
     return;
   }
@@ -66,12 +65,14 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       caches.match(req).then((cached) => {
         if (cached) return cached;
-        return fetch(req).then((res) => {
-          const cache = caches.open(RUNTIME_CACHE);
-          cache.then((c) => c.put(req, res.clone()));
-          return res;
-        }).catch(() => cached as Response);
-      })
+        return fetch(req)
+          .then((res) => {
+            const cache = caches.open(RUNTIME_CACHE);
+            cache.then((c) => c.put(req, res.clone()));
+            return res;
+          })
+          .catch(() => cached);
+      }),
     );
   }
 });
