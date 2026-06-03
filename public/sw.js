@@ -1,6 +1,6 @@
-// MUGEC-CI Service Worker — cache offline pour le portail public.
+// ANZRBO Service Worker — cache offline pour le portail public.
 // Stratégie : network-first pour les navigations (HTML), cache-first pour les assets statiques.
-const CACHE_VERSION = "mugec-v2";
+const CACHE_VERSION = "anzrbo-v3";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -66,11 +66,13 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       caches.match(req).then((cached) => {
         if (cached) return cached;
-        return fetch(req).then((res) => {
-          const cache = caches.open(RUNTIME_CACHE);
-          cache.then((c) => c.put(req, res.clone()));
-          return res;
-        }).catch(() => cached as Response);
+        return fetch(req)
+          .then((res) => {
+            const cache = caches.open(RUNTIME_CACHE);
+            cache.then((c) => c.put(req, res.clone()));
+            return res;
+          })
+          .catch(() => cached);
       })
     );
   }
