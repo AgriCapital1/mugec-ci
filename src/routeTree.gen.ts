@@ -19,6 +19,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as VerifierTelephoneRouteImport } from './routes/verifier.$telephone'
 import { Route as AdminNsiaRouteImport } from './routes/admin/nsia'
+import { Route as AdminDiagnosticsRouteImport } from './routes/admin/diagnostics'
 import { Route as AdminCotisationsRouteImport } from './routes/admin/cotisations'
 import { Route as AdminAssistancesRouteImport } from './routes/admin/assistances'
 import { Route as AdminNsiaIndexRouteImport } from './routes/admin/nsia.index'
@@ -76,6 +77,11 @@ const AdminNsiaRoute = AdminNsiaRouteImport.update({
   path: '/admin/nsia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminDiagnosticsRoute = AdminDiagnosticsRouteImport.update({
+  id: '/admin/diagnostics',
+  path: '/admin/diagnostics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminCotisationsRoute = AdminCotisationsRouteImport.update({
   id: '/admin/cotisations',
   path: '/admin/cotisations',
@@ -117,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/scanner': typeof ScannerRoute
   '/admin/assistances': typeof AdminAssistancesRoute
   '/admin/cotisations': typeof AdminCotisationsRoute
+  '/admin/diagnostics': typeof AdminDiagnosticsRoute
   '/admin/nsia': typeof AdminNsiaRouteWithChildren
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin/': typeof AdminIndexRoute
@@ -135,6 +142,7 @@ export interface FileRoutesByTo {
   '/scanner': typeof ScannerRoute
   '/admin/assistances': typeof AdminAssistancesRoute
   '/admin/cotisations': typeof AdminCotisationsRoute
+  '/admin/diagnostics': typeof AdminDiagnosticsRoute
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin': typeof AdminIndexRoute
   '/admin/membres/nouveau': typeof AdminMembresNouveauRoute
@@ -153,6 +161,7 @@ export interface FileRoutesById {
   '/scanner': typeof ScannerRoute
   '/admin/assistances': typeof AdminAssistancesRoute
   '/admin/cotisations': typeof AdminCotisationsRoute
+  '/admin/diagnostics': typeof AdminDiagnosticsRoute
   '/admin/nsia': typeof AdminNsiaRouteWithChildren
   '/verifier/$telephone': typeof VerifierTelephoneRoute
   '/admin/': typeof AdminIndexRoute
@@ -173,6 +182,7 @@ export interface FileRouteTypes {
     | '/scanner'
     | '/admin/assistances'
     | '/admin/cotisations'
+    | '/admin/diagnostics'
     | '/admin/nsia'
     | '/verifier/$telephone'
     | '/admin/'
@@ -191,6 +201,7 @@ export interface FileRouteTypes {
     | '/scanner'
     | '/admin/assistances'
     | '/admin/cotisations'
+    | '/admin/diagnostics'
     | '/verifier/$telephone'
     | '/admin'
     | '/admin/membres/nouveau'
@@ -208,6 +219,7 @@ export interface FileRouteTypes {
     | '/scanner'
     | '/admin/assistances'
     | '/admin/cotisations'
+    | '/admin/diagnostics'
     | '/admin/nsia'
     | '/verifier/$telephone'
     | '/admin/'
@@ -227,6 +239,7 @@ export interface RootRouteChildren {
   ScannerRoute: typeof ScannerRoute
   AdminAssistancesRoute: typeof AdminAssistancesRoute
   AdminCotisationsRoute: typeof AdminCotisationsRoute
+  AdminDiagnosticsRoute: typeof AdminDiagnosticsRoute
   AdminNsiaRoute: typeof AdminNsiaRouteWithChildren
   VerifierTelephoneRoute: typeof VerifierTelephoneRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -306,6 +319,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminNsiaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/diagnostics': {
+      id: '/admin/diagnostics'
+      path: '/admin/diagnostics'
+      fullPath: '/admin/diagnostics'
+      preLoaderRoute: typeof AdminDiagnosticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/cotisations': {
       id: '/admin/cotisations'
       path: '/admin/cotisations'
@@ -375,6 +395,7 @@ const rootRouteChildren: RootRouteChildren = {
   ScannerRoute: ScannerRoute,
   AdminAssistancesRoute: AdminAssistancesRoute,
   AdminCotisationsRoute: AdminCotisationsRoute,
+  AdminDiagnosticsRoute: AdminDiagnosticsRoute,
   AdminNsiaRoute: AdminNsiaRouteWithChildren,
   VerifierTelephoneRoute: VerifierTelephoneRoute,
   AdminIndexRoute: AdminIndexRoute,

@@ -9,8 +9,11 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 import { AuthProvider } from "@/lib/auth";
+import { initClientDiagnostics } from "@/lib/client-diagnostics";
+import { registerServiceWorker } from "@/lib/register-sw";
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -119,6 +122,11 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    initClientDiagnostics();
+    registerServiceWorker();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
