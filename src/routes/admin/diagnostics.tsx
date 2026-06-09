@@ -17,6 +17,7 @@ import { useAuth } from "@/lib/auth";
 type BuildManifest = {
   checkedAt?: string;
   vercelOutputDirectory?: string;
+  publicOutputDirectory?: string;
   serverEntry?: string;
   publicFiles?: number;
   deployment?: { environment?: string; url?: string | null; gitCommit?: string | null };
@@ -120,10 +121,11 @@ function AdminDiagnostics() {
           <Card className="border-0 shadow-md">
             <CardHeader>
               <CardTitle>Build Vercel</CardTitle>
-              <CardDescription>La configuration cible explicitement .output/dist pour éviter toute ambiguïté preview/production.</CardDescription>
+              <CardDescription>La configuration cible explicitement la racine .output attendue par Vercel, avec les fichiers publics dans .output/public.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
               <InfoRow label="Dossier public attendu" value={BUILD_INFO.expectedVercelOutputDirectory} />
+              <InfoRow label="Assets publics" value={manifest?.publicOutputDirectory ?? BUILD_INFO.publicOutputDirectory} />
               <InfoRow label="Dossier serveur" value={BUILD_INFO.serverOutputDirectory} />
               <InfoRow label="Mode build" value={BUILD_INFO.buildMode} />
               <InfoRow label="Environnement Vercel" value={manifest?.deployment?.environment ?? BUILD_INFO.vercelEnv} />
