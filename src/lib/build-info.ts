@@ -1,6 +1,7 @@
 export const BUILD_INFO = {
   app: "ANZRBO",
-  expectedVercelOutputDirectory: ".output/dist",
+  expectedVercelOutputDirectory: ".output",
+  publicOutputDirectory: ".output/public",
   serverOutputDirectory: ".output/server",
   buildMode: import.meta.env.MODE,
   builtAt: new Date().toISOString(),

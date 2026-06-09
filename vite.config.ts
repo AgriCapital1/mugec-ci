@@ -44,11 +44,6 @@ export default defineConfig(({ mode }) => {
       }),
       nitro({
         preset: "vercel",
-        output: {
-          dir: ".output",
-          publicDir: ".output/dist",
-          serverDir: ".output/server",
-        },
       }),
       viteReact(),
     ],
